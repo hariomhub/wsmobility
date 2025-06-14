@@ -36,7 +36,7 @@ const ParentNav = () => {
           {/* Logo and brand name */}
           <div className="flex items-center">
             <a href="/" className="flex items-center">
-              <img style={{width:130, height:80}} src='assets/parentCompanyLogo1.png' alt='ws-mob-logo'/>
+              <img style={{width:130, height:80}} src='assets/parentCompanyLogo.jpg' alt='ws-mob-logo'/>
             </a>
           </div>
           
