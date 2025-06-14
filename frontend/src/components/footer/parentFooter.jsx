@@ -13,7 +13,7 @@ const ParentFooter = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <img 
-                src="assets/parentCompanyLogo.jpg" 
+                src="assets/parentCompanyLogo1.png" 
                 alt="WS Mobility Logo" 
                 className="h-12 w-auto"
               />
@@ -22,16 +22,14 @@ const ParentFooter = () => {
               A visionary startup revolutionizing the automobile industry in Bihar with comprehensive mobility solutions.
             </p>
             <div className="flex space-x-4 mt-6">
-              <a href="#" className="bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
+              <a href="https://www.facebook.com/profile.php?id=61574614275395" className="bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
                 <Facebook size={18} className="text-green-700" />
               </a>
-              <a href="#" className="bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
+              <a href="https://www.instagram.com/wsmobility?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className="bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
                 <Instagram size={18} className="text-green-700" />
               </a>
-              <a href="#" className="bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
-                <Twitter size={18} className="text-green-700" />
-              </a>
-              <a href="#" className="bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
+      
+              <a href="https://www.linkedin.com/company/wsmobility/" className="bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
                 <Linkedin size={18} className="text-green-700" />
               </a>
             </div>
@@ -58,10 +56,10 @@ const ParentFooter = () => {
                 </a>
               </li>
               <li>
-                <a href="/coming-soon" className="flex items-center text-gray-600 hover:text-green-700 transition-colors duration-300">
+                <a href="https://www.nkebikes.com/" className="flex items-center text-gray-600 hover:text-green-700 transition-colors duration-300">
                   <ChevronRight size={16} className="mr-2 text-green-600" />
                   <span className="flex items-center font-semibold">
-                    <Zap size={16} className="mr-2" /> Mantra E-Bikes
+                    <Zap size={16} className="mr-2" /> NK E-Bikes
                   </span>
                 </a>
               </li>
@@ -129,7 +127,7 @@ const ParentFooter = () => {
                   <MapPin size={18} className="text-green-600" />
                 </div>
                 <p className="text-gray-600">
-                  Mitu Palace-202, Near PNB bank, Kanti Factory Rd, Chitragupta Nagar,
+                  202 Mitu Palace, Near PNB bank, Kanti Factory Rd, Chitragupta Nagar,
                   Kankarbagh, Patna, Bihar-800026
                 </p>
               </li>

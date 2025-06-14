@@ -24,15 +24,14 @@ const ParentHero = () => {
 
     const carouselRef = useRef(null);
     const logos = [
-        { id: 1, name: 'bike1', src: 'assets/bike-photos/IMG-20250402-WA0004.jpg' },
-        { id: 2, name: 'bike1', src: 'assets/bike-photos/IMG-20250402-WA0005.jpg' },
-        { id: 3, name: 'bike1', src: 'assets/bike-photos/IMG-20250402-WA0006.jpg' },
-        { id: 4, name: 'bike1', src: 'assets/bike-photos/IMG-20250402-WA0007.jpg' },
-        { id: 5, name: 'bike1', src: 'assets/bike-photos/IMG-20250402-WA0008.jpg' },
-        { id: 6, name: 'bike1', src: 'assets/bike-photos/IMG-20250402-WA0009.jpg' },
-        { id: 7, name: 'bike1', src: 'assets/bike-photos/IMG-20250402-WA0010.jpg' },
-        { id: 8, name: 'bike1', src: 'assets/bike-photos/IMG-20250402-WA0011.jpg' },
-        { id: 9, name: 'bike1', src: 'assets/bike-photos/IMG-20250402-WA0012.jpg' }
+        { id: 1, name: 'bike1', src: 'assets/bike-photos/1.png' },
+        { id: 2, name: 'bike1', src: 'assets/bike-photos/2.png' },
+        { id: 3, name: 'bike1', src: 'assets/bike-photos/3.png' },
+        { id: 4, name: 'bike1', src: 'assets/bike-photos/4.png' },
+        { id: 5, name: 'bike1', src: 'assets/bike-photos/5.png' },
+        { id: 6, name: 'bike1', src: 'assets/bike-photos/6.png' },
+        { id: 7, name: 'bike1', src: 'assets/bike-photos/7.png' },
+        
     ];
 
     useEffect(() => {
@@ -489,7 +488,7 @@ const ParentHero = () => {
                     </div>
                     <div className="md:w-1/2">
                         <img
-                            src="assets/parentCompanyLogo.jpg"
+                            src="assets/parentCompanyLogo1.png"
                             alt="WS-mobility"
                             className="rounded-lg shadow-lg w-full object-cover"
                         />
