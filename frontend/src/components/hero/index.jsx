@@ -22,7 +22,7 @@ const Hero = ({ isOpen }) => {
   // Countdown logic
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const targetDate = new Date("2025-04-28T23:59:59").getTime(); // Set target date
+      const targetDate = new Date("2025-08-28T23:59:59").getTime(); // Set target date
       const now = new Date().getTime();
       const difference = targetDate - now;
 
@@ -109,7 +109,7 @@ const Hero = ({ isOpen }) => {
                 <span>Evaluation</span>
               </div>
             </Link>
-            <Link to={'/under-progress'} className="w-1/2 sm:w-auto">
+            <Link to={'/carhub/contract-form'} className="w-1/2 sm:w-auto">
               <div className="card pl-4 pr-4 md:pl-6 md:pr-6 bg-white text-center hover:shadow-green-800 transform transition duration-300 hover:-translate-y-2 p-3 m-2 md:m-4 shadow-xl rounded-xl hover:cursor-pointer font-bold">
                 <img style={{ width: '50px', marginLeft: '10px' }} src="/assets/service-icons/contract.png" />
                 <span>Service</span> <br />
