@@ -212,10 +212,21 @@ import {
   Linkedin,
   Zap,
   Settings,
+  Download,
 } from "lucide-react";
 
 const ParentFooter = () => {
   const currentYear = new Date().getFullYear();
+
+  const downloadBrochure = () => {
+    const brochureUrl = "/Brochure Draft 1.pdf"; // Replace with your actual file path
+    const link = document.createElement("a");
+    link.href = brochureUrl;
+    link.download = "WS-Mobility-Brochure.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <footer className="bg-gray-900 border-t-4 border-green-600">
@@ -255,6 +266,14 @@ const ParentFooter = () => {
                 <Linkedin size={28} className="text-green-400" />
               </a>
             </div>
+            {/* Download Brochure Button */}
+            <button
+              onClick={downloadBrochure}
+              className="mt-6 w-full flex items-center justify-center gap-2 border-2 border-green-600 hover:border-green-400 text-green-600 hover:text-green-400 font-semibold px-4 py-3 rounded-lg transition-all duration-300"
+            >
+              <Download size={20} />
+              Download Brochure
+            </button>
           </div>
 
           {/* Column 2: Our Services */}
@@ -264,29 +283,7 @@ const ParentFooter = () => {
             </h3>
             <div className="w-28 h-1 bg-green-500 mb-6"></div>
             <ul className="space-y-3">
-              <li>
-                <a
-                  href="/carhub"
-                  className="flex items-center text-gray-300 hover:text-green-400 transition-colors duration-300"
-                >
-                  <ChevronRight size={16} className="mr-2 text-green-500" />
-                  <span className="flex items-center font-semibold">
-                    <Car size={16} className="mr-2" /> WS Services
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/coming-soon"
-                  className="flex items-center text-gray-300 hover:text-green-400 transition-colors duration-300"
-                >
-                  <ChevronRight size={16} className="mr-2 text-green-500" />
-                  <span className="flex items-center font-semibold">
-                    <Bike size={16} className="mr-2" /> Bikemen Services
-                  </span>
-                </a>
-              </li>
-              <li>
+              {/* <li>
                 <a
                   href="https://www.nkebikes.com/"
                   className="flex items-center text-gray-300 hover:text-green-400 transition-colors duration-300"
@@ -307,7 +304,7 @@ const ParentFooter = () => {
                     <Zap size={16} className="mr-2" /> RAP ECO Motors
                   </span>
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a
                   href="#"
@@ -340,7 +337,7 @@ const ParentFooter = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/our-team"
                   className="flex items-center text-gray-300 hover:text-green-400"
                 >
                   <ChevronRight size={16} className="mr-2 text-green-500" />
@@ -349,16 +346,16 @@ const ParentFooter = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/blog"
                   className="flex items-center text-gray-300 hover:text-green-400"
                 >
                   <ChevronRight size={16} className="mr-2 text-green-500" />
-                  Blog & News
+                  Blog 
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/privacy-policy"
                   className="flex items-center text-gray-300 hover:text-green-400"
                 >
                   <ChevronRight size={16} className="mr-2 text-green-500" />
@@ -367,7 +364,7 @@ const ParentFooter = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/terms-conditions"
                   className="flex items-center text-gray-300 hover:text-green-400"
                 >
                   <ChevronRight size={16} className="mr-2 text-green-500" />
@@ -392,7 +389,7 @@ const ParentFooter = () => {
               Our Partners
             </h3>
             <div className="w-28 h-1 bg-green-500 mb-6"></div>
-            <ul className="space-y-3">
+            {/* <ul className="space-y-3">
               <li>
                 <a
                   href="https://www.nkebikes.com/"
@@ -411,7 +408,7 @@ const ParentFooter = () => {
                   RAP ECO MOTORS
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           {/* Column 5: Contact Info */}

@@ -210,6 +210,9 @@ const ParentNav = () => {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   const handlePartnership = () => navigate("/ev-dealership-opportunity");
+  const handleScooty = () => navigate("/scooty");
+  const handleBattery = () => navigate("/battery");
+  const handleCareers = () => navigate("/careers");
 
   const handleClick = (e, targetId) => {
     e.preventDefault();
@@ -241,7 +244,7 @@ const ParentNav = () => {
   };
 
   const navItems = [
-    { name: "Home", targetId: "home" },
+    { name: "Home", targetId: "/" },
     {
       name: "Become a Partner",
       targetId: "partnership",
@@ -249,14 +252,18 @@ const ParentNav = () => {
     },
     {
       name: "Our Partners",
-      hasDropdown: true,
-      partners: [
-        { name: "NK E-BIKES", url: "https://www.nkebikes.com/" },
-        { name: "RAP ECO MOTORS", url: "https://rapmotors.in/" },
-      ],
+      // hasDropdown: true,
+      // partners: [
+      //   { name: "NK E-BIKES", url: "https://www.nkebikes.com/" },
+      //   { name: "RAP ECO MOTORS", url: "https://rapmotors.in/" },
+      // ],
     },
-    { name: "About Us", targetId: "aboutwsmobility" },
-    { name: "Contact Us", targetId: "contactSection" },
+    // { name: "About Us", targetId: "aboutwsmobility" },
+    // { name: "Contact Us", targetId: "contactSection" },
+    { name: "Scooty", targetId: "scooty", onClick: handleScooty },
+    { name: "Battery", targetId: "battery", onClick: handleBattery },
+    { name: "Careers", targetId: "careers", onClick: handleCareers },
+
   ];
 
   // Scroll progress effect
@@ -332,10 +339,14 @@ const ParentNav = () => {
                     </div>
                   ) : (
                     <a
-                      href={item.href}
+                      href={item.href || "#"}
                       onClick={(e) => {
-                        handleClick(e, item.targetId);
-                        item.onClick?.();
+                        e.preventDefault();
+                        if (item.onClick) {
+                          item.onClick();
+                        } else {
+                          handleClick(e, item.targetId);
+                        }
                       }}
                       className="px-2 py-2 text-gray-700 hover:text-green-700 cursor-pointer rounded-md text-lg font-medium transition-colors duration-300"
                     >
@@ -346,12 +357,12 @@ const ParentNav = () => {
               ))}
 
               {/* Download Brochure Button */}
-              <button
+              {/* <button
                 className="px-4 py-2 text-green-600 border border-green-600 rounded-lg hover:bg-green-50 transition-colors"
                 onClick={downloadBrochure}
               >
                 Download Brochure
-              </button>
+              </button> */}
             </div>
 
             {/* Mobile menu button */}
@@ -404,10 +415,14 @@ const ParentNav = () => {
                       </>
                     ) : (
                       <a
-                        href={href}
+                        href={href || "#"}
                         onClick={(e) => {
-                          handleClick(e, targetId);
-                          onClick?.();
+                          e.preventDefault();
+                          if (onClick) {
+                            onClick();
+                          } else {
+                            handleClick(e, targetId);
+                          }
                         }}
                         className="block px-3 py-2 hover:cursor-pointer text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-md text-lg font-medium"
                       >

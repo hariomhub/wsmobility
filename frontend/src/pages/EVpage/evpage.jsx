@@ -15,7 +15,6 @@ const EVLandingPage = () => {
     const handleExploreClick = () => {
         navigate('/evbikemodels');
     }
-    const [activeModel, setActiveModel] = useState(0);
 
     const address = "Engtian Electric Bike Pvt Ltd - Gut No 35, Nk E-Bike, Village -Dhotre Bk, Block - Parner, Ahmednagar, Maharashtra 414304";
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
@@ -35,31 +34,25 @@ const EVLandingPage = () => {
 
     const models = [
         {
-            name: 'WS Urban Pro',
-            subtitle: 'The Daily Commuter',
-            range: '120 km',
-            speed: '65 kmph',
-            charging: '4-5 hours',
+            name: 'SE ULTRA 7.2KW',
+            batteryType: 'LIPO 4',
+            range: '418km',
+            speed: '60-70km/h',
             image: '/api/placeholder/400/300',
-            features: ['Perfect for office commute', 'Optimal battery life', 'Cost-effective solution']
         },
         {
-            name: 'WS Elite',
-            subtitle: 'The Smart Rider',
-            range: '150 km',
-            speed: '70 kmph',
-            charging: '4-5 hours',
+            name: 'SE X4',
+            batteryType: 'GRAPHENE',
+            range: '60-70+km',
+            speed: '25km/h',
             image: '/api/placeholder/400/300',
-            features: ['App connectivity', 'GPS tracking', 'Premium comfort']
         },
         {
-            name: 'WS Cargo',
-            subtitle: 'The Business Partner',
-            range: '100 km',
-            speed: '60 kmph',
-            charging: '5-6 hours',
+            name: 'SE LI 2kw',
+            batteryType: 'LITHIUM',
+            range: '100+km',
+            speed: '25km/h',
             image: '/api/placeholder/400/300',
-            features: ['150 kg payload', 'Commercial use', 'Quick ROI']
         }
     ];
 
@@ -239,12 +232,6 @@ const EVLandingPage = () => {
     const totalSlides = Math.ceil(testimonials.length / itemsPerView);
     const currentSlide = Math.floor(currentIndex / itemsPerView);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveModel((prev) => (prev + 1) % models.length);
-        }, 5000);
-        return () => clearInterval(interval);
-    }, []);
 
     return (
         <div className="min-h-screen bg-white">
@@ -297,97 +284,56 @@ const EVLandingPage = () => {
             </section>
 
             {/* Product Models */}
-            <section id="product-portfolio" className="py-16 bg-white">
+            <section id="product-portfolio" className="py-16 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
                         <h2 className="md:text-5xl font-bold text-gray-900 mb-4">Our Product Portfolio</h2>
                         <p className="text-gray-600 text-2xl max-w-2xl mx-auto">High-demand electric vehicles with attractive profit margins</p>
                     </div>
 
-                    <div className="relative">
-                        <div className="overflow-hidden">
-                            <div className="flex transition-transform duration-500 ease-in-out"
-                                style={{ transform: `translateX(-${activeModel * 100}%)` }}>
-                                {models.map((model, index) => (
-                                    <div key={index} className="w-full flex-shrink-0">
-                                        <div className="bg-gray-100 rounded-2xl shadow-lg overflow-hidden mx-4">
-                                            <div className="md:flex">
-                                                <div className="md:w-1/2 p-8">
-                                                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{model.name}</h3>
-                                                    <p className="text-green-600 font-semibold mb-4">{model.subtitle}</p>
-
-                                                    <div className="grid grid-cols-2 gap-4 mb-6">
-                                                        <div>
-                                                            <span className="text-sm text-gray-500">Range</span>
-                                                            <p className="font-semibold">{model.range}</p>
-                                                        </div>
-                                                        <div>
-                                                            <span className="text-sm text-gray-500">Top Speed</span>
-                                                            <p className="font-semibold">{model.speed}</p>
-                                                        </div>
-                                                        <div>
-                                                            <span className="text-sm text-gray-500">Charging</span>
-                                                            <p className="font-semibold">{model.charging}</p>
-                                                        </div>
-                                                        <div>
-                                                            <span className="text-sm text-gray-500">Price</span>
-                                                            <p className="font-semibold text-green-600">{model.price}*</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <ul className="space-y-2 mb-6">
-                                                        {model.features.map((feature, idx) => (
-                                                            <li key={idx} className="flex items-center text-sm text-gray-600">
-                                                                <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
-                                                                {feature}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-
-                                                    <div className="flex flex-col sm:flex-row gap-3">
-                                                        <button className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                                                            Book Test Ride
-                                                        </button>
-                                                        <button className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                                                            EMI Calculator
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div className="md:w-1/2 bg-blue-100 flex items-center justify-center p-8">
-                                                    <div className="w-full h-64 bg-gradient-to-br from-green-100 to-blue-100 rounded-lg flex items-center justify-center">
-                                                        <span className="text-gray-500">EV Bike Image</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                    {/* Product Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {models.map((model, index) => (
+                            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                                {/* Product Image */}
+                                <div className="relative h-64 bg-gradient-to-br from-amber-50 to-orange-50 overflow-hidden">
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
+                                            <span className="text-gray-400 text-sm">Product Image</span>
                                         </div>
                                     </div>
-                                ))}
+                                </div>
+
+                                {/* Product Details */}
+                                <div className="p-6">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-2">{model.name}</h3>
+                                    
+                                    <div className="space-y-3 mb-6">
+                                        <div>
+                                            <span className="text-sm text-gray-500">Battery Type</span>
+                                            <p className="font-semibold text-gray-900">{model.batteryType}</p>
+                                        </div>
+                                        <div>
+                                            <span className="text-sm text-gray-500">Range</span>
+                                            <p className="font-semibold text-gray-900">{model.range}</p>
+                                        </div>
+                                        <div>
+                                            <span className="text-sm text-gray-500">Top speed</span>
+                                            <p className="font-semibold text-gray-900">{model.speed}</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Read More Link */}
+                                    <a
+                                        href="#"
+                                        className="text-green-600 hover:text-green-700 font-semibold text-sm transition-colors duration-300 inline-flex items-center"
+                                    >
+                                        Read more
+                                        <ArrowRight size={16} className="ml-1" />
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-
-                        <button
-                            className="absolute -left-2 top-1/2 transform -translate-y-1/2 bg-green-100 rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow"
-                            onClick={() => setActiveModel((prev) => (prev - 1 + models.length) % models.length)}
-                        >
-                            <ChevronLeft className="w-8 h-8" />
-                        </button>
-                        <button
-                            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-green-100 rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow"
-                            onClick={() => setActiveModel((prev) => (prev + 1) % models.length)}
-                        >
-                            <ChevronRight className="w-8 h-8" />
-                        </button>
-
-                        <div className="flex justify-center mt-6 space-x-2">
-                            {models.map((_, index) => (
-                                <button
-                                    key={index}
-                                    className={`w-3 h-3 rounded-full transition-colors ${index === activeModel ? 'bg-green-600' : 'bg-gray-300'
-                                        }`}
-                                    onClick={() => setActiveModel(index)}
-                                />
-                            ))}
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>

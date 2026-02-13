@@ -18,6 +18,14 @@ import EvbikePage from './pages/EVpage/evbikePage';
 import EVDealership from './pages/EVpage/evdealership';
 import DealershipContact from './pages/DealershipContact/DealershipContact';
 import ContractServicesPage from './pages/Service-pages/contract-form';
+import Blog from './pages/Blog/blog';
+import BlogDetail from './pages/Blog/blogDetail';
+import PrivacyPolicy from './pages/PrivacyPolicy/privacyPolicy';
+import TermsConditions from './pages/TermsConditions/termsConditions';
+import OurTeam from './pages/OurTeam/ourTeam';
+import Scooty from './pages/Scooty/scooty';
+import BatteryPage from './pages/Battery/battery';
+import Careers from './pages/Careers/careers';
 function App() {
   return (
     <Routes>
@@ -44,6 +52,14 @@ function App() {
       <Route path='/evbikemodels' element={<EvbikePage/>}/>
       <Route path='/evdealershipcontact' element={<DealershipContact/>}/>
       <Route path='/evdealership' element={<EVDealership/> }   />
+      <Route path='/blog' element={<Blog/>}/>
+      <Route path='/blog/:id' element={<BlogDetail/>}/>
+      <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
+      <Route path='/terms-conditions' element={<TermsConditions/>}/>
+      <Route path='/our-team' element={<OurTeam/>}/>
+      <Route path='/scooty' element={<Scooty/>}/>
+      <Route path='/battery' element={<BatteryPage/>}/>
+      <Route path='/careers' element={<Careers/>}/>
     </Routes> 
   );
 }
