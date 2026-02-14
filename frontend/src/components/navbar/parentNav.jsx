@@ -280,10 +280,22 @@ const ParentNav = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
+  return ( 
     <>
       {/* Scroll Progress Bar */}
       <div
+<<<<<<< HEAD
+        //   style={{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              style={{     11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        //   position: 'fixed', 
+        //   top: 0,
+        //   left: 0,
+        //   height: '6px',
+        //   width: `${scrollWidth}%`,
+        //   backgroundColor: '#10b981', // Tailwind green-500
+        //   zIndex: 9999,
+        //   transition: 'width 0.25s ease-out'
+        // }}
+=======
         style={{
           position: "fixed",
           top: 0,
@@ -294,6 +306,7 @@ const ParentNav = () => {
           zIndex: 9999,
           transition: "width 0.25s ease-out",
         }}
+>>>>>>> c2313778b7836e856e05912863273ab2315b5a94
       />
 
       {/* Navigation Bar */}
