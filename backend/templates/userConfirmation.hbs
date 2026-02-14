@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Confirmation - {{companyName}}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 0;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .success-icon {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .checkmark {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+        }
+        .application-details {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #22c55e;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .label {
+            font-weight: 600;
+            color: #374151;
+        }
+        .value {
+            color: #6b7280;
+            word-break: break-word;
+        }
+        .next-steps {
+            background-color: #eff6ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #22c55e;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #16a34a;
+        }
+        .footer {
+            background-color: #f8fafc;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+            border-radius: 0 0 10px 10px;
+        }
+        .social-links {
+            margin: 15px 0;
+        }
+        .social-links a {
+            margin: 0 10px;
+            color: #22c55e;
+            text-decoration: none;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+        .motivation-section {
+            background-color: #f0f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #0ea5e9;
+        }
+        .motivation-text {
+            margin-top: 10px;
+        }
+        .motivation-quote {
+            font-style: italic;
+            color: #374151;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border-left: 3px solid #0ea5e9;
+        }
+        .contact-info {
+            background-color: #f0fdf4;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #22c55e;
+        }
+        .warning-box {
+            background-color: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .warning-box h4 {
+            margin-top: 0;
+            color: #d97706;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                width: auto;
+            }
+            .content {
+                padding: 20px;
+            }
+            .detail-row {
+                flex-direction: column;
+            }
+            .value {
+                margin-top: 5px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="cid:company-logo" alt="{{companyName}}" class="logo">
+            <h1>Application Received Successfully!</h1>
+            <p>Thank you for your interest in becoming our dealership partner</p>
+        </div>
+        
+        <div class="content">
+            <div class="success-icon">
+                <div class="checkmark">✓</div>
+            </div>
+            
+            <h2>Dear {{fullName}},</h2>
+            
+            <p>We have successfully received your dealership application. Thank you for your interest in partnering with us to promote sustainable transportation solutions!</p>
+            
+            <div class="application-details">
+                <h3>Application Details</h3>
+                <div class="detail-row">
+                    <span class="label">Application ID:</span>
+                    <span class="value">{{applicationId}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Submission Date:</span>
+                    <span class="value">{{submissionDate}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Status:</span>
+                    <span class="value"><span class="status-badge">Under Review</span></span>
+                </div>
+                <!-- Personal Details -->
+                <div class="detail-row">
+                    <span class="label">Full Name:</span>
+                    <span class="value">{{fullName}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Email:</span>
+                    <span class="value">{{email}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Phone Number:</span>
+                    <span class="value">+91 {{phoneNumber}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Age:</span>
+                    <span class="value">{{age}} years</span>
+                </div>
+                
+                <!-- Business Details -->
+                {{#if businessName}}
+                <div class="detail-row">
+                    <span class="label">Business Name:</span>
+                    <span class="value">{{businessName}}</span>
+                </div>
+                {{/if}}
+                <div class="detail-row">
+                    <span class="label">Business Type:</span>
+                    <span class="value">{{businessType}}</span>
+                </div>
+                {{#if gstNumber}}
+                <div class="detail-row">
+                    <span class="label">GST Number:</span>
+                    <span class="value">{{gstNumber}}</span>
+                </div>
+                {{/if}}
+                <div class="detail-row">
+                    <span class="label">Automotive Experience:</span>
+                    <span class="value">{{hasExperience}}</span>
+                </div>
+                {{#if experienceDetails}}
+                <div class="detail-row">
+                    <span class="label">Experience Details:</span>
+                    <span class="value">{{experienceDetails}}</span>
+                </div>
+                {{/if}}
+                
+                <!-- Location Details -->
+                <div class="detail-row">
+                    <span class="label">Location:</span>
+                    <span class="value">{{city}}, {{state}} - {{pincode}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Area Type:</span>
+                    <span class="value">{{areaType}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Dealership Address:</span>
+                    <span class="value">{{dealershipAddress}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Property Status:</span>
+                    <span class="value">{{propertyStatus}}</span>
+                </div>
+                
+                <!-- Infrastructure -->
+                <div class="detail-row">
+                    <span class="label">Showroom Size:</span>
+                    <span class="value">{{showroomSize}} sq. ft.</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Service Area:</span>
+                    <span class="value">{{hasServiceArea}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Parking Space:</span>
+                    <span class="value">{{hasParkingSpace}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Power Backup:</span>
+                    <span class="value">{{hasPowerBackup}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Charging Station:</span>
+                    <span class="value">{{hasChargingStation}}</span>
+                </div>
+                
+                <!-- Investment & Financials -->
+                <div class="detail-row">
+                    <span class="label">Investment Capacity:</span>
+                    <span class="value">{{investmentCapacity}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Investment Source:</span>
+                    <span class="value">{{investmentSource}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Willing to Meet Targets:</span>
+                    <span class="value">{{meetTargets}}</span>
+                </div>
+                
+                <!-- Team Setup -->
+                <div class="detail-row">
+                    <span class="label">Planned Sales Executives:</span>
+                    <span class="value">{{salesExecutives}} person(s)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Planned Technicians:</span>
+                    <span class="value">{{technicians}} person(s)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Willing to Train Staff:</span>
+                    <span class="value">{{trainStaff}}</span>
+                </div>
+                
+                <!-- Brand Exclusivity -->
+                <div class="detail-row">
+                    <span class="label">Brand Exclusivity:</span>
+                    <span class="value">{{exclusivity}}</span>
+                </div>
+                
+                <!-- Documents -->
+                <div class="detail-row">
+                    <span class="label">Documents Submitted:</span>
+                    <span class="value">
+                        {{#if idProof}}ID Proof, {{/if}}
+                        {{#if addressProof}}Address Proof, {{/if}}
+                        {{#if businessProof}}Business Proof, {{/if}}
+                        {{#if propertyLayout}}Property Layout{{/if}}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="next-steps">
+                <h3>🚀 What Happens Next?</h3>
+                <p><strong>Review Process (5-7 business days):</strong></p>
+                <ul>
+                    <li>Our team will review your application and supporting documents</li>
+                    <li>We may contact you for additional information if needed</li>
+                    <li>Background and business verification will be conducted</li>
+                </ul>
+                
+                <p><strong>Decision & Onboarding:</strong></p>
+                <ul>
+                    <li>You'll receive an email with our decision within 7 business days</li>
+                    <li>If approved, we'll schedule an onboarding call to discuss next steps</li>
+                    <li>Training materials and dealership agreement will be provided</li>
+                </ul>
+            </div>
+
+            <div class="motivation-section">
+                <h3>💡 Your Motivation</h3>
+                <div class="motivation-text">
+                    <p><strong>Why do you want this dealership?</strong></p>
+                    <p class="motivation-quote">"{{motivation}}"</p>
+                </div>
+            </div>
+                <h4>📞 Need Assistance?</h4>
+                <p>If you have any questions about your application, please don't hesitate to reach out:</p>
+                <p><strong>Email:</strong> partnerships@{{companyDomain}}<br>
+                <strong>Phone:</strong> {{supportPhone}}<br>
+                <strong>Business Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Important Note</h4>
+                <p>Please save this email for your records. Your application ID <strong>{{applicationId}}</strong> will be required for any future correspondence regarding this application.</p>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{portalUrl}}" class="cta-button">Track Application Status</a>
+            </div>
+
+            <p>We appreciate your interest in joining our network of dealership partners and look forward to potentially working together to expand sustainable transportation solutions.</p>
+            
+            <p>Best regards,<br>
+            <strong>{{companyName}} Partnership Team</strong></p>
+        </div>
+        
+        <div class="footer">
+            <div class="social-links">
+                <a href="{{websiteUrl}}">Website</a>
+                <a href="{{facebookUrl}}">Facebook</a>
+                <a href="{{twitterUrl}}">Twitter</a>
+                <a href="{{linkedinUrl}}">LinkedIn</a>
+            </div>
+            
+            <p>© {{currentYear}} {{companyName}}. All rights reserved.</p>
+            <p>{{companyAddress}}</p>
+            
+            <p style="font-size: 12px; margin-top: 15px;">
+                This email was sent to {{email}}. If you believe you received this email in error, 
+                please contact our support team at support@{{companyDomain}}.
+            </p>
+            
+            <p style="font-size: 11px; color: #9ca3af;">
+                Please do not reply to this email as it is sent from an unmonitored address. 
+                For support, use the contact information provided above.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Dealership Application - {{companyName}}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 0;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .urgent-badge {
+            background-color: #fbbf24;
+            color: #92400e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .alert-icon {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .notification-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #dc2626;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+        }
+        .quick-summary {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f59e0b;
+        }
+        .priority-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .priority-item {
+            background-color: #ffffff;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+        .application-details {
+            background-color: #f8fafc;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        .section-header {
+            background-color: #e5e7eb;
+            padding: 10px 15px;
+            margin: 15px -25px 15px -25px;
+            font-weight: 600;
+            color: #374151;
+            border-left: 4px solid #6b7280;
+        }
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .label {
+            font-weight: 600;
+            color: #374151;
+            min-width: 140px;
+        }
+        .value {
+            color: #6b7280;
+            word-break: break-word;
+            text-align: right;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        .high-priority {
+            background-color: #fee2e2;
+            border-left-color: #dc2626 !important;
+        }
+        .medium-priority {
+            background-color: #fef3c7;
+            border-left-color: #f59e0b !important;
+        }
+        .assessment-section {
+            background-color: #eff6ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd6fe;
+        }
+        .score-item:last-child {
+            border-bottom: none;
+        }
+        .score-value {
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: white;
+        }
+        .score-high { background-color: #16a34a; }
+        .score-medium { background-color: #ca8a04; }
+        .score-low { background-color: #dc2626; }
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        .action-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .btn-approve {
+            background-color: #16a34a;
+            color: white;
+        }
+        .btn-review {
+            background-color: #ca8a04;
+            color: white;
+        }
+        .btn-reject {
+            background-color: #dc2626;
+            color: white;
+        }
+        .btn-approve:hover { background-color: #15803d; }
+        .btn-review:hover { background-color: #a16207; }
+        .btn-reject:hover { background-color: #b91c1c; }
+        .contact-urgency {
+            background-color: #fecaca;
+            border: 1px solid #dc2626;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .contact-urgency h4 {
+            margin-top: 0;
+            color: #dc2626;
+        }
+        .documents-section {
+            background-color: #f0fdf4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #16a34a;
+        }
+        .doc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #bbf7d0;
+        }
+        .doc-item:last-child {
+            border-bottom: none;
+        }
+        .doc-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .doc-uploaded {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        .doc-missing {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+        .footer {
+            background-color: #f8fafc;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+            border-radius: 0 0 10px 10px;
+        }
+        .timestamp {
+            font-size: 12px;
+            color: #9ca3af;
+            text-align: center;
+            margin: 15px 0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                width: auto;
+            }
+            .content {
+                padding: 20px;
+            }
+            .priority-info,
+            .detail-grid,
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            .detail-row {
+                flex-direction: column;
+            }
+            .value {
+                text-align: left;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="urgent-badge">⚡ Action Required</div>
+            <img src="cid:company-logo" alt="{{companyName}}" class="logo">
+            <h1>New Dealership Application Received</h1>
+            <p>Review and respond to application #{{applicationId}}</p>
+        </div>
+        
+        <div class="content">
+            <div class="alert-icon">
+                <div class="notification-icon">📋</div>
+            </div>
+            
+            <h2>Application Alert - Priority Review Required</h2>
+            
+            <p>A new dealership application has been submitted and requires immediate review. Please evaluate the application details below and take appropriate action within 24 hours.</p>
+            
+            <div class="quick-summary">
+                <h3>🎯 Quick Summary</h3>
+                <div class="priority-info">
+                    <div class="priority-item">
+                        <strong>Applicant:</strong> {{fullName}}
+                    </div>
+                    <div class="priority-item">
+                        <strong>Location:</strong> {{city}}, {{state}}
+                    </div>
+                    <div class="priority-item">
+                        <strong>Investment:</strong> {{investmentCapacity}}
+                    </div>
+                    <div class="priority-item">
+                        <strong>Business Type:</strong> {{businessType}}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="application-details">
+                <h3>📋 Complete Application Details</h3>
+                
+                <div class="section-header">👤 Personal Information</div>
+                <div class="detail-grid">
+                    <div class="detail-row">
+                        <span class="label">Full Name:</span>
+                        <span class="value">{{fullName}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Age:</span>
+                        <span class="value">{{age}} years</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Email:</span>
+                        <span class="value">{{email}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Phone:</span>
+                        <span class="value">+91 {{phoneNumber}}</span>
+                    </div>
+                </div>
+                
+                <div class="section-header">🏢 Business Information</div>
+                <div class="detail-grid">
+                    <div class="detail-row">
+                        <span class="label">Business Type:</span>
+                        <span class="value">{{businessType}}</span>
+                    </div>
+                    {{#if businessName}}
+                    <div class="detail-row">
+                        <span class="label">Business Name:</span>
+                        <span class="value">{{businessName}}</span>
+                    </div>
+                    {{/if}}
+                    {{#if gstNumber}}
+                    <div class="detail-row">
+                        <span class="label">GST Number:</span>
+                        <span class="value">{{gstNumber}}</span>
+                    </div>
+                    {{/if}}
+                    <div class="detail-row">
+                        <span class="label">Automotive Experience:</span>
+                        <span class="value">{{hasExperience}}</span>
+                    </div>
+                </div>
+                {{#if experienceDetails}}
+                <div class="detail-row full-width">
+                    <span class="label">Experience Details:</span>
+                    <span class="value">{{experienceDetails}}</span>
+                </div>
+                {{/if}}
+                
+                <div class="section-header">📍 Location & Infrastructure</div>
+                <div class="detail-grid">
+                    <div class="detail-row">
+                        <span class="label">City/State:</span>
+                        <span class="value">{{city}}, {{state}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Pincode:</span>
+                        <span class="value">{{pincode}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Area Type:</span>
+                        <span class="value">{{areaType}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Property Status:</span>
+                        <span class="value">{{propertyStatus}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Showroom Size:</span>
+                        <span class="value">{{showroomSize}} sq. ft.</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Service Area:</span>
+                        <span class="value">{{hasServiceArea}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Parking Space:</span>
+                        <span class="value">{{hasParkingSpace}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Power Backup:</span>
+                        <span class="value">{{hasPowerBackup}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Charging Station:</span>
+                        <span class="value">{{hasChargingStation}}</span>
+                    </div>
+                </div>
+                <div class="detail-row full-width">
+                    <span class="label">Dealership Address:</span>
+                    <span class="value">{{dealershipAddress}}</span>
+                </div>
+                
+                <div class="section-header">💰 Financial & Investment</div>
+                <div class="detail-grid">
+                    <div class="detail-row">
+                        <span class="label">Investment Capacity:</span>
+                        <span class="value">{{investmentCapacity}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Investment Source:</span>
+                        <span class="value">{{investmentSource}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Meet Brand Targets:</span>
+                        <span class="value">{{meetTargets}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Brand Exclusivity:</span>
+                        <span class="value">{{exclusivity}}</span>
+                    </div>
+                </div>
+                
+                <div class="section-header">👥 Team Planning</div>
+                <div class="detail-grid">
+                    <div class="detail-row">
+                        <span class="label">Sales Executives:</span>
+                        <span class="value">{{salesExecutives}} person(s)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Technicians:</span>
+                        <span class="value">{{technicians}} person(s)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Train Staff:</span>
+                        <span class="value">{{trainStaff}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-section high-priority">
+                <h3>📊 Initial Assessment Checklist</h3>
+                <div class="score-item">
+                    <span>Location Viability ({{areaType}}):</span>
+                    <span class="score-value score-{{locationScore}}">{{locationScoreText}}</span>
+                </div>
+                <div class="score-item">
+                    <span>Investment Capacity:</span>
+                    <span class="score-value score-{{investmentScore}}">{{investmentScoreText}}</span>
+                </div>
+                <div class="score-item">
+                    <span>Infrastructure Readiness:</span>
+                    <span class="score-value score-{{infrastructureScore}}">{{infrastructureScoreText}}</span>
+                </div>
+                <div class="score-item">
+                    <span>Experience Level:</span>
+                    <span class="score-value score-{{experienceScore}}">{{experienceScoreText}}</span>
+                </div>
+                <div class="score-item">
+                    <span><strong>Overall Priority:</strong></span>
+                    <span class="score-value score-{{overallScore}}">{{overallScoreText}}</span>
+                </div>
+            </div>
+
+            <div class="documents-section">
+                <h3>📁 Documents Submitted</h3>
+                <div class="doc-item">
+                    <span>ID Proof (Aadhaar/PAN):</span>
+                    <span class="doc-status {{#if idProof}}doc-uploaded{{else}}doc-missing{{/if}}">
+                        {{#if idProof}}✓ Uploaded{{else}}❌ Missing{{/if}}
+                    </span>
+                </div>
+                <div class="doc-item">
+                    <span>Address Proof:</span>
+                    <span class="doc-status {{#if addressProof}}doc-uploaded{{else}}doc-missing{{/if}}">
+                        {{#if addressProof}}✓ Uploaded{{else}}❌ Missing{{/if}}
+                    </span>
+                </div>
+                <div class="doc-item">
+                    <span>Business Proof:</span>
+                    <span class="doc-status {{#if businessProof}}doc-uploaded{{else}}doc-missing{{/if}}">
+                        {{#if businessProof}}✓ Uploaded{{else}}❌ Missing{{/if}}
+                    </span>
+                </div>
+                <div class="doc-item">
+                    <span>Property Layout:</span>
+                    <span class="doc-status {{#if propertyLayout}}doc-uploaded{{else}}doc-missing{{/if}}">
+                        {{#if propertyLayout}}✓ Uploaded{{else}}📷 Optional{{/if}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="assessment-section">
+                <h3>💭 Applicant's Motivation</h3>
+                <div style="background-color: #ffffff; padding: 15px; border-radius: 6px; border-left: 3px solid #3b82f6;">
+                    <p style="font-style: italic; margin: 0; color: #374151;">"{{motivation}}"</p>
+                </div>
+            </div>
+
+            <div class="contact-urgency">
+                <h4>📞 Immediate Contact Information</h4>
+                <p><strong>Applicant:</strong> {{fullName}}<br>
+                <strong>Email:</strong> <a href="mailto:{{email}}">{{email}}</a><br>
+                <strong>Phone:</strong> <a href="tel:+91{{phoneNumber}}">+91 {{phoneNumber}}</a></p>
+                <p><strong>⏰ Response Required:</strong> Within 24 hours of receiving this application</p>
+            </div>
+
+            <div class="action-buttons">
+                <a href="{{approvalUrl}}" class="action-btn btn-approve">
+                    ✅ Approve Application
+                </a>
+                <a href="{{reviewUrl}}" class="action-btn btn-review">
+                    📋 Request More Info
+                </a>
+                <a href="{{rejectionUrl}}" class="action-btn btn-reject">
+                    ❌ Decline Application
+                </a>
+            </div>
+
+            <div style="text-align: center; margin: 25px 0;">
+                <a href="{{adminDashboardUrl}}" style="display: inline-block; background-color: #6366f1; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: 600;">
+                    🎛️ Open Admin Dashboard
+                </a>
+            </div>
+
+            <div class="timestamp">
+                <p>Application submitted on: {{submissionDate}} | Application ID: {{applicationId}}</p>
+                <p>This notification was generated automatically by the dealership application system</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>{{companyName}} - Dealership Management System</strong></p>
+            <p>Internal Use Only - Do Not Forward</p>
+            <p style="font-size: 12px; margin-top: 15px;">
+                This email contains confidential business information. Please handle according to company privacy policies.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

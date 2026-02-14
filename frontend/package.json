@@ -10,6 +10,7 @@
     "@mui/icons-material": "^6.4.2",
     "@mui/material": "^6.4.2",
     "@radix-ui/react-slot": "^1.1.2",
+    "@supabase/supabase-js": "^2.55.0",
     "axios": "^1.10.0",
     "bootstrap": "^5.3.5",
     "boxicons": "^2.1.4",
