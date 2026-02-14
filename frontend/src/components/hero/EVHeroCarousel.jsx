@@ -47,7 +47,7 @@ const EVHeroCarousel = () => {
   const goToSlide = (index) => setCurrentSlide(index);
 
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section className="relative h-screen overflow-hidden bg-black/20 text-white">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
