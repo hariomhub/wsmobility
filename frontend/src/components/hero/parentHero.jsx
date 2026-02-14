@@ -17,6 +17,7 @@ import {
     Settings, 
     Zap
 } from 'lucide-react';
+import EVHeroCarousel from "./EVHeroCarousel";
 
 const ParentHero = () => {
     const [rotation, setRotation] = useState(0);
@@ -139,8 +140,10 @@ const ParentHero = () => {
                     <div className="absolute bottom-10 right-10 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 bg-gradient-to-bl from-blue-400/10 to-green-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }}></div>
                 </div>
 
+
                 {/* Main Content Container */}
                 <div className="relative z-20 w-full max-w-7xl mx-auto">
+                <EVHeroCarousel/>
                     {/* Title Section */}
                     <div className="text-center mb-8 sm:mb-10 md:mb-10 lg:mb-10">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-2xl">
