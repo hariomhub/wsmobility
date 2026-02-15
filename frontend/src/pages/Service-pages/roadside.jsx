@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import {
     Phone,
-    MapPin,
     Battery,
     Wrench,
-    Car,
     Lock,
-    Clock,
-    CheckCircle,
     Truck,
     AlertTriangle,
     Shield,
     Gauge,
-    Activity,
-    ChevronRight
+    Activity
 } from 'lucide-react';
 import Header from '../../components/navbar';
 import Footer from '../../components/footer/Footers';

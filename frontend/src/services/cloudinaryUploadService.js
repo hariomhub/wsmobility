@@ -144,7 +144,6 @@ class CloudinaryUploadService {
   async uploadMultipleFiles(files, onProgress = null) {
     const results = [];
     const errors = [];
-    let totalProgress = 0;
     const fileCount = Object.keys(files).filter(key => files[key]).length;
 
     console.log('Starting multiple file upload:', {
@@ -152,9 +151,11 @@ class CloudinaryUploadService {
       files: Object.keys(files).filter(key => files[key])
     });
 
+    const progressState = { completed: 0 };
     for (const [category, file] of Object.entries(files)) {
       if (!file) continue;
 
+      const currentCompleted = progressState.completed;
       try {
         console.log(`Uploading ${category}:`, file.name);
         const result = await this.uploadFile(
@@ -162,12 +163,13 @@ class CloudinaryUploadService {
           category,
           (progress) => {
             if (onProgress) {
-              const categoryProgress = progress / fileCount;
-              totalProgress = (totalProgress + categoryProgress);
-              onProgress(Math.min(totalProgress, 100));
+              const currentFileProgress = progress / fileCount;
+              const completedProgress = (currentCompleted / fileCount) * 100;
+              onProgress(Math.min(completedProgress + currentFileProgress, 100));
             }
           }
         );
+        progressState.completed++;
         results.push({ category, ...result });
         console.log(`Successfully uploaded ${category}`);
       } catch (error) {
@@ -184,4 +186,5 @@ class CloudinaryUploadService {
   }
 }
 
-export default new CloudinaryUploadService();
+const cloudinaryUploadService = new CloudinaryUploadService();
+export default cloudinaryUploadService;
