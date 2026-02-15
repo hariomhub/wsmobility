@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, TrendingUp, Target, DollarSign, Award, Megaphone, Headphones, ExternalLink, Factory, Zap, Plus, Shield, Smartphone, Wrench, Leaf, Calculator, MapPin, Phone, Mail, MessageCircle, Star, CheckCircle, ArrowRight, Menu, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, TrendingUp, Target, DollarSign, Award, Megaphone, Headphones, ExternalLink, Factory, Plus, MapPin, Phone, Star, ArrowRight, X } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import EvNavbar from '../../components/navbar/evNav';
 import EVMarket from './evmarket';
@@ -324,13 +324,13 @@ const EVLandingPage = () => {
                                     </div>
 
                                     {/* Read More Link */}
-                                    <a
-                                        href="#"
-                                        className="text-green-600 hover:text-green-700 font-semibold text-sm transition-colors duration-300 inline-flex items-center"
+                                    <button
+                                        onClick={() => {}}
+                                        className="text-green-600 hover:text-green-700 font-semibold text-sm transition-colors duration-300 inline-flex items-center bg-transparent border-none cursor-pointer p-0"
                                     >
                                         Read more
                                         <ArrowRight size={16} className="ml-1" />
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -505,7 +505,7 @@ const EVLandingPage = () => {
                     {/* Main Content */}
                     <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
                         <div className="relative h-96 bg-gray-200 flex items-center justify-center">
-                            <img src='assets/manufacturing.png' className='w-160' />
+                            <img src='assets/manufacturing.png' className='w-160' alt='Manufacturing hub facility' />
                         </div>
 
                         <div className="p-8 lg:p-12">

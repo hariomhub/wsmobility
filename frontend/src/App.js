@@ -10,7 +10,6 @@ import ParentHome from './pages/ParentHome/home';
 import AppointForm from './pages/forms/appointmentForm';
 import RoadSideAssistance from './pages/Service-pages/roadside';
 import Layout from './components/navbar/layout';
-import Coming from './components/comingSoon/coming';
 import UnderProgress from './components/underProgress/underprogress';
 import EVLandingPage from './pages/EVpage/evpage';
 import EvbikePage from './pages/EVpage/evbikePage';
