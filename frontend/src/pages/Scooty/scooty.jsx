@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import ParentNav from "../../components/navbar/parentNav";
 import ParentFooter from "../../components/footer/parentFooter";
 import ScrollToTopButton from "../../utils/ScrollToTopButton";
-import { ArrowRight, Zap, Gauge, Battery, Settings, Info, Shield, Activity } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { ArrowRight, Zap, Gauge, Battery, Shield, Activity } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import bike1 from "../../assets/bike1.png";
 import bike2 from "../../assets/bike2.png";
@@ -16,7 +15,6 @@ import bike8 from "../../assets/bike8.png";
 import bike9 from "../../assets/bike9.png";
 
 const Scooty = () => {
-  const navigate = useNavigate();
   const [selectedScooter, setSelectedScooter] = useState(null);
 
   const scooters = [
