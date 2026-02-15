@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.5b15a747.css",
-    "main.js": "/static/js/main.34a94972.js",
+    "main.css": "/static/css/main.dfbd6786.css",
+    "main.js": "/static/js/main.6bd01f85.js",
     "static/js/488.2c668ff7.chunk.js": "/static/js/488.2c668ff7.chunk.js",
     "static/media/startup.png": "/static/media/startup.efdd49a20c5fb7fe0b73.png",
     "static/media/iit.png": "/static/media/iit.ef6d84e2a9d39952903b.png",
@@ -19,12 +19,12 @@
     "static/media/bihar.png": "/static/media/bihar.56ad3e9bcafb36c036ab.png",
     "static/media/iim.png": "/static/media/iim.b5566271ffab2aec52c5.png",
     "index.html": "/index.html",
-    "main.5b15a747.css.map": "/static/css/main.5b15a747.css.map",
-    "main.34a94972.js.map": "/static/js/main.34a94972.js.map",
+    "main.dfbd6786.css.map": "/static/css/main.dfbd6786.css.map",
+    "main.6bd01f85.js.map": "/static/js/main.6bd01f85.js.map",
     "488.2c668ff7.chunk.js.map": "/static/js/488.2c668ff7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5b15a747.css",
-    "static/js/main.34a94972.js"
+    "static/css/main.dfbd6786.css",
+    "static/js/main.6bd01f85.js"
   ]
 }

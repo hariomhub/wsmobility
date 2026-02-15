@@ -27,7 +27,6 @@ import {
     Activity,
     X
 } from 'lucide-react';
-import EVHeroCarousel from "./EVHeroCarousel";
 
 import biharLogo from "../../assets/bihar.png";
 import iimLogo from "../../assets/iim.png";
@@ -558,22 +557,21 @@ const ParentHero = () => {
                     <div className="absolute bottom-10 right-10 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 bg-gradient-to-bl from-green-500/25 to-emerald-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }}></div>
                 </div>
 
-
                 {/* Main Content Container */}
-                <div className="relative z-20 w-full max-w-7xl mx-auto">
-                <EVHeroCarousel/>
-                    {/* Title Section */}
-                    <div className="text-center mb-8 sm:mb-10 md:mb-10 lg:mb-10">
-                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-2xl">
-                            <span className="block mb-2 sm:mb-4">Premium EV & Automotive Solutions</span>
-                            <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                                Your Journey, Our Expertise
-                            </span>
-                        </h1>
-                        <p className="text-base sm:text-lg md:text-xl lg:text-3xl text-gray-200 max-w-7xl mx-auto leading-relaxed drop-shadow-lg px-4 sm:px-0">
-                            Offering exclusive EV dealership opportunities and delivering top-tier car care throughout <span className="font-bold">Bihar & Jharkhand</span>
-                        </p>
-                    </div>
+                <div className="relative z-20 w-full max-w-7xl mx-auto flex">
+                    <div className="flex-grow">
+                        {/* Title Section */}
+                        <div className="text-center mb-8 sm:mb-10 md:mb-10 lg:mb-10">
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight drop-shadow-2xl">
+                                <span className="block mb-2 sm:mb-4">Premium EV & Automotive Solutions</span>
+                                <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                                    Your Journey, Our Expertise
+                                </span>
+                            </h1>
+                            <p className="text-base sm:text-lg md:text-xl lg:text-3xl text-gray-800 max-w-7xl mx-auto leading-relaxed drop-shadow-lg px-4 sm:px-0">
+                                Offering exclusive EV dealership opportunities and delivering  <br />top-tier solutions   <span className="font-bold text-green-700">across India</span>
+                            </p>
+                        </div>
 
                         {/* Service Cards - 2 Cards in a Row */}
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 justify-center items-stretch mb-12 sm:mb-16 md:mb-20 max-w-5xl mx-auto">
