@@ -213,11 +213,16 @@ const ParentNav = () => {
   const handleScooty = () => navigate("/scooty");
   const handleBattery = () => navigate("/battery");
   const handleCareers = () => navigate("/careers");
+  const handleGallery = () => navigate("/gallery");
 
   const handleClick = (e, targetId) => {
     e.preventDefault();
     if (targetId === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (window.location.pathname === "/") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/");
+      }
       return;
     }
     const section = document.getElementById(targetId);
@@ -244,7 +249,7 @@ const ParentNav = () => {
   };
 
   const navItems = [
-    { name: "Home", targetId: "/" },
+    { name: "Home", targetId: "home" },
     {
       name: "Become a Partner",
       targetId: "partnership",
@@ -263,6 +268,7 @@ const ParentNav = () => {
     { name: "Scooty", targetId: "scooty", onClick: handleScooty },
     { name: "Battery", targetId: "battery", onClick: handleBattery },
     { name: "Careers", targetId: "careers", onClick: handleCareers },
+    { name: "Gallery", targetId: "gallery", onClick: handleGallery },
 
   ];
 
@@ -301,13 +307,16 @@ const ParentNav = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
           <div className="flex justify-between h-20">
             <div className="flex items-center">
-              <a href="/" className="flex items-center">
+              <div
+                onClick={() => navigate("/")}
+                className="flex items-center cursor-pointer"
+              >
                 <img
                   style={{ width: 120, height: 120 }}
                   src="assets/parentCompanyLogo1.png"
                   alt="ws-mob-logo"
                 />
-              </a>
+              </div>
             </div>
 
             {/* Desktop nav */}

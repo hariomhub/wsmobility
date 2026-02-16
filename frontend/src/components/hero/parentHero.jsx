@@ -25,7 +25,9 @@ import {
     Thermometer,
     Weight,
     Activity,
-    X
+    X,
+    Star,
+    Plus
 } from 'lucide-react';
 
 import biharLogo from "../../assets/bihar.png";
@@ -499,6 +501,150 @@ const ParentHero = () => {
 
     const [hoverBattery, setHoverBattery] = useState(false);
 
+    const [testimonials, setTestimonials] = useState([
+        {
+            id: 1,
+            name: 'Rajesh Motors',
+            role: 'Authorized Dealer, Mumbai',
+            text: 'Partnership with WS Mobility transformed our business. 40% increase in monthly sales within 6 months!',
+            rating: 5,
+            date: '2024-01-15'
+        },
+        {
+            id: 2,
+            name: 'Green Wheels Dealership',
+            role: 'Multi-brand Dealer, Bangalore',
+            text: 'Excellent support from WS team. Training programs and marketing assistance helped us become the top dealer in our region.',
+            rating: 5,
+            date: '2024-01-20'
+        },
+        {
+            id: 3,
+            name: 'Speed Zone Motors',
+            role: 'Authorized Distributor, Delhi NCR',
+            text: 'Started with zero EV knowledge. WS Mobility\'s comprehensive training made us EV experts. ROI exceeded expectations!',
+            rating: 5,
+            date: '2024-01-25'
+        },
+        {
+            id: 4,
+            name: 'City Bike Hub',
+            role: 'Franchise Owner, Pune',
+            text: 'Low investment, high returns. The dealership model is dealer-friendly with great profit margins.',
+            rating: 4,
+            date: '2024-02-01'
+        },
+        {
+            id: 5,
+            name: 'Electric Avenue',
+            role: 'Dealership Partner, Hyderabad',
+            text: 'Customer demand for WS bikes is incredible. Inventory moves fast, profits are consistent.',
+            rating: 5,
+            date: '2024-02-05'
+        },
+        {
+            id: 6,
+            name: 'Future Mobility Solutions',
+            role: 'Service & Sales Center, Chennai',
+            text: 'Technical support is outstanding. Spare parts availability and warranty claims process is seamless.',
+            rating: 5,
+            date: '2024-02-10'
+        }
+    ]);
+
+    const [testimonialIndex, setTestimonialIndex] = useState(0);
+    const [showTestimonialForm, setShowTestimonialForm] = useState(false);
+    const [newTestimonial, setNewTestimonial] = useState({
+        name: '',
+        role: '',
+        text: '',
+        rating: 5
+    });
+    const [testimonialItemsPerView, setTestimonialItemsPerView] = useState(3);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 640) {
+                setTestimonialItemsPerView(1);
+            } else if (window.innerWidth < 1024) {
+                setTestimonialItemsPerView(2);
+            } else {
+                setTestimonialItemsPerView(3);
+            }
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Testimonial Auto-scroll
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTestimonialIndex((prevIndex) => {
+                const totalSlides = Math.ceil(testimonials.length / testimonialItemsPerView);
+                const currentSlide = Math.floor(prevIndex / testimonialItemsPerView);
+                if (currentSlide >= totalSlides - 1) {
+                    return 0;
+                }
+                return prevIndex + testimonialItemsPerView;
+            });
+        }, 4000);
+
+        return () => clearInterval(timer);
+    }, [testimonials.length, testimonialItemsPerView]);
+
+    const nextTestimonial = () => {
+        const totalSlides = Math.ceil(testimonials.length / testimonialItemsPerView);
+        const currentSlide = Math.floor(testimonialIndex / testimonialItemsPerView);
+        if (currentSlide < totalSlides - 1) {
+            setTestimonialIndex(prev => prev + testimonialItemsPerView);
+        } else {
+            setTestimonialIndex(0);
+        }
+    };
+
+    const prevTestimonial = () => {
+        const currentSlide = Math.floor(testimonialIndex / testimonialItemsPerView);
+        if (currentSlide > 0) {
+            setTestimonialIndex(prev => prev - testimonialItemsPerView);
+        } else {
+            const totalSlides = Math.ceil(testimonials.length / testimonialItemsPerView);
+            setTestimonialIndex((totalSlides - 1) * testimonialItemsPerView);
+        }
+    };
+
+    const handleTestimonialInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewTestimonial(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleTestimonialRatingChange = (rating) => {
+        setNewTestimonial(prev => ({
+            ...prev,
+            rating
+        }));
+    };
+
+    const submitTestimonial = () => {
+        if (newTestimonial.name && newTestimonial.role && newTestimonial.text) {
+            const review = {
+                id: testimonials.length + 1,
+                ...newTestimonial,
+                date: new Date().toISOString().split('T')[0]
+            };
+            setTestimonials(prev => [review, ...prev]);
+            setNewTestimonial({ name: '', role: '', text: '', rating: 5 });
+            setShowTestimonialForm(false);
+        }
+    };
+
+    const totalTestimonialSlides = Math.ceil(testimonials.length / testimonialItemsPerView);
+    const currentTestimonialSlide = Math.floor(testimonialIndex / testimonialItemsPerView);
+
     return (
         <section className="bg-gradient-to-br from-white via-green-50 to-emerald-50 pt-16 sm:pt-20 md:pt-24 lg:pt-8">
             {/* Hero Section */}
@@ -783,7 +929,7 @@ const ParentHero = () => {
                                             </p>
 
                                             <a
-                                                href="/battery-solutions"
+                                                href="/battery"
                                                 className={`inline-flex items-center border-2 border-emerald-600 transition-all duration-500 bg-emerald-600 hover:bg-emerald-700 text-white backdrop-blur-md px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl font-medium text-sm sm:text-base min-h-[44px] ${hoverBattery ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-90'}`}
                                             >
                                                 <span className="font-bold">View Solutions</span>
@@ -881,7 +1027,7 @@ const ParentHero = () => {
                                 <h3 className="text-2xl font-bold text-green-700 mb-6 underline decoration-green-400 underline-offset-8">Our Journey</h3>
                                 <p className="text-gray-700 text-lg leading-relaxed mb-6">
                                     WS Mobility Pvt. Ltd. is a visionary startup founded with the mission to
-                                    revolutionize the automobile industry in Bihar. We offer a comprehensive,
+                                    revolutionize the automobile industry in India. We offer a comprehensive,
                                     one-stop solution for all mobility needs, bridging the gap in automotive service and sales.
                                 </p>
                                 <p className="text-gray-700 text-lg leading-relaxed mb-8">
@@ -1015,7 +1161,7 @@ const ParentHero = () => {
                     </div> */}
 
                     {/* Company Image Gallery - Carousel */}
-                    <div className="mb-24 px-4">
+                    {/* <div className="mb-24 px-4">
                         <h3 className="text-3xl font-bold text-teal-900 mb-12 text-center">Our Company in Action</h3>
                         <div className="relative max-w-4xl mx-auto group">
                             <div className="overflow-hidden rounded-3xl shadow-2xl relative h-[250px] md:h-[350px] lg:h-[450px]">
@@ -1031,7 +1177,7 @@ const ParentHero = () => {
                                 </div>
                             </div>
 
-                            {/* Navigation Arrows */}
+                          
                             <button
                                 onClick={prevImage}
                                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-teal-800 p-3 rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 z-10 hover:scale-110 group-hover:bg-white"
@@ -1048,7 +1194,7 @@ const ParentHero = () => {
                                 <ChevronRight size={32} />
                             </button>
 
-                            {/* Indicators */}
+                          
                             <div className="flex justify-center mt-6 space-x-2">
                                 {images.map((_, idx) => (
                                     <button
@@ -1061,14 +1207,51 @@ const ParentHero = () => {
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
+
+
+                    {/* Our Company in Action */}
+                    <section className="py-20 bg-white relative overflow-hidden">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center mb-16">
+                                <div className="inline-block mb-4">
+                                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                                        Our Company in Action
+                                    </h2>
+                                    <div className="h-1.5 w-24 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full"></div>
+                                </div>
+                                <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                                    Take a look at our latest updates, manufacturing excellence, and presence across India.
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                {[
+                                    'DNU8bJJJ8ko',
+                                    'DL6tPoqCsq3',
+                                    'DSKSKhUDuxs'
+                                ].map((id, index) => (
+                                    <div key={index} className="rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-gray-50 h-[600px] relative group">
+                                        <iframe
+                                            src={`https://www.instagram.com/reel/${id}/embed`}
+                                            className="w-full h-full border-none no-scrollbar"
+                                            allowFullScreen
+                                            scrolling="no"
+                                            title={`Instagram Reel ${index + 1}`}
+                                        ></iframe>
+                                        <div className="absolute inset-0 pointer-events-none border-2 border-transparent group-hover:border-green-500/30 transition-all duration-300 rounded-3xl"></div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
 
                     {/* Call to Action */}
-                    <div className="text-center mt-16">
+                    {/* <div className="text-center mt-16">
                         <button className="px-12 py-4 bg-gradient-to-r from-teal-600 to-green-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-green-300 transition-all duration-300 transform hover:-translate-y-1">
                             Connect With Us
                         </button>
-                    </div>
+                    </div> */}
                 </div>
 
                 <style jsx>{`
@@ -1103,8 +1286,115 @@ const ParentHero = () => {
                     .pause-on-hover:hover {
                         animation-play-state: paused;
                     }
+                    .no-scrollbar::-webkit-scrollbar {
+                        display: none;
+                    }
+                    .no-scrollbar {
+                        -ms-overflow-style: none;
+                        scrollbar-width: none;
+                    }
                 `}</style>
             </div>
+
+            {/* Testimonials */}
+            <section id='success-stories' className="py-20 bg-gradient-to-br from-white via-green-50 to-emerald-100 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-20">
+                    <div className="absolute top-20 left-10 w-32 h-32 bg-green-300 rounded-full blur-xl animate-pulse"></div>
+                    <div className="absolute top-40 right-20 w-24 h-24 bg-emerald-300 rounded-full blur-lg animate-bounce delay-1000"></div>
+                </div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div className="text-center mb-16">
+                        <div className="inline-block mb-4">
+                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                                What Our Partners Say
+                            </h2>
+                            <div className="h-1.5 w-24 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full"></div>
+                        </div>
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                            WS Mobility has empowered hundreds of entrepreneurs across India to build successful EV businesses.
+                        </p>
+                    </div>
+
+                    <div className="relative">
+                        <div className="overflow-hidden py-4">
+                            <div
+                                className="flex transition-transform duration-500 ease-in-out"
+                                style={{
+                                    transform: `translateX(-${currentTestimonialSlide * 100}%)`
+                                }}
+                            >
+                                {Array.from({ length: totalTestimonialSlides }).map((_, slideIndex) => (
+                                    <div key={slideIndex} className="w-full flex-shrink-0">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+                                            {testimonials
+                                                .slice(slideIndex * testimonialItemsPerView, (slideIndex + 1) * testimonialItemsPerView)
+                                                .map((testimonial) => (
+                                                    <div key={testimonial.id} className="bg-white rounded-3xl p-8 shadow-xl border border-green-100 hover:shadow-2xl hover:border-green-300 transition-all duration-300 group">
+                                                        <div className="flex items-center gap-1 mb-6">
+                                                            {[...Array(5)].map((_, i) => (
+                                                                <Star
+                                                                    key={i}
+                                                                    size={18}
+                                                                    className={`${i < testimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-200'} transition-colors`}
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                        <p className="text-gray-700 mb-8 italic leading-relaxed text-lg">
+                                                            "{testimonial.text}"
+                                                        </p>
+                                                        <div className="flex items-center gap-4">
+                                                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-bold text-xl">
+                                                                {testimonial.name.charAt(0)}
+                                                            </div>
+                                                            <div>
+                                                                <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
+                                                                <p className="text-sm text-green-600">{testimonial.role}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Navigation Arrows */}
+                        {totalTestimonialSlides > 1 && (
+                            <>
+                                <button
+                                    onClick={prevTestimonial}
+                                    className="absolute left-[-20px] top-1/2 -translate-y-1/2 bg-white text-gray-900 p-4 rounded-full shadow-2xl hover:bg-green-600 hover:text-white transition-all z-20"
+                                >
+                                    <ChevronLeft size={24} />
+                                </button>
+                                <button
+                                    onClick={nextTestimonial}
+                                    className="absolute right-[-20px] top-1/2 -translate-y-1/2 bg-white text-gray-900 p-4 rounded-full shadow-2xl hover:bg-green-600 hover:text-white transition-all z-20"
+                                >
+                                    <ChevronRight size={24} />
+                                </button>
+                            </>
+                        )}
+                    </div>
+
+                    {/* Pagination Dots */}
+                    {totalTestimonialSlides > 1 && (
+                        <div className="flex justify-center mt-12 gap-3">
+                            {Array.from({ length: totalTestimonialSlides }).map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setTestimonialIndex(index * testimonialItemsPerView)}
+                                    className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonialSlide === index ? 'bg-green-600 w-8' : 'bg-green-200'}`}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </section>
+
+
 
             {/* Contact Section - Redesigned */}
             <div id="contactSection" className="w-full bg-gradient-to-br from-green-50 to-emerald-100 py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
@@ -1201,7 +1491,7 @@ const ParentHero = () => {
 
                             <div className="mt-auto relative rounded-2xl overflow-hidden h-64 sm:h-72 w-full group">
                                 <img
-                                    src="assets/delivery.jpg"
+                                    src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweqZDMWSknD-0eZYOI-j4vxWYHcnrrqp8lfPCuimanMMmsUSZNTOBU1luZZhtxyAKMRus9wD9ADNXTmpmMOGZOR6K6tJO20o8DEG_gGJCdYZAgR0GY2QBFbNz05v3FWDJuQiFfk0ZZtPN8xm=s1360-w1360-h1020-rw"
                                     alt="WS Mobility Delivery Vehicle"
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
@@ -1389,6 +1679,7 @@ const ParentHero = () => {
                     </div>
                 )
             }
+
         </section>
     );
 };

@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { Search, Filter, X, ChevronDown, SortAsc, SortDesc, Star, Zap, Gauge, Battery } from 'lucide-react';
+import { Search, Filter, X, ChevronDown, SortAsc, SortDesc, Star, Zap, Gauge, Battery, ArrowRight, Shield, Activity, Settings, Info, Box, Maximize, Weight, Lightbulb, Map } from 'lucide-react';
+import { AnimatePresence, motion } from "motion/react";
 
 const BikeModels = ({ bikes: initialBikes = [] }) => {
-    
+
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [sortBy, setSortBy] = useState('name');
@@ -15,42 +16,43 @@ const BikeModels = ({ bikes: initialBikes = [] }) => {
     const [batteryType, setBatteryType] = useState('all');
     const [motorType, setMotorType] = useState('all');
     const [chargingType, setChargingType] = useState('all');
+    const [selectedBike, setSelectedBike] = useState(null);
 
     // calculations filtering ke liye
     const { categories, filterOptions } = useMemo(() => {
         const cats = [...new Set(initialBikes.map(bike => bike.category))].filter(Boolean).sort();
-        
-        const batteryTypes = [...new Set(initialBikes.map(bike => 
+
+        const batteryTypes = [...new Set(initialBikes.map(bike =>
             bike.specifications?.batteryType || bike.specifications?.battery
         ).filter(Boolean))].sort();
-        
-        const motorTypes = [...new Set(initialBikes.map(bike => 
+
+        const motorTypes = [...new Set(initialBikes.map(bike =>
             bike.specifications?.motorType || bike.specifications?.motor
         ).filter(Boolean))].sort();
-        
-        const chargingTypes = [...new Set(initialBikes.map(bike => 
+
+        const chargingTypes = [...new Set(initialBikes.map(bike =>
             bike.specifications?.chargingType || bike.specifications?.charging
         ).filter(Boolean))].sort();
-        
-        const speeds = initialBikes.map(bike => 
+
+        const speeds = initialBikes.map(bike =>
             parseInt(bike.specifications?.speed?.toString().replace(/\D/g, '') || '0')
         ).filter(speed => speed > 0);
-        
-        const ranges = initialBikes.map(bike => 
+
+        const ranges = initialBikes.map(bike =>
             parseInt(bike.specifications?.range?.toString().replace(/\D/g, '') || '0')
         ).filter(range => range > 0);
-        
+
         return {
             categories: cats,
             filterOptions: {
                 batteryTypes,
                 motorTypes,
                 chargingTypes,
-                speedBounds: speeds.length > 0 ? 
-                    { min: Math.min(...speeds), max: Math.max(...speeds) } : 
+                speedBounds: speeds.length > 0 ?
+                    { min: Math.min(...speeds), max: Math.max(...speeds) } :
                     { min: 0, max: 200 },
-                rangeBounds: ranges.length > 0 ? 
-                    { min: Math.min(...ranges), max: Math.max(...ranges) } : 
+                rangeBounds: ranges.length > 0 ?
+                    { min: Math.min(...ranges), max: Math.max(...ranges) } :
                     { min: 0, max: 300 }
             }
         };
@@ -58,14 +60,26 @@ const BikeModels = ({ bikes: initialBikes = [] }) => {
 
     // Utility functions
     const getSpecIcon = useCallback((key) => {
-        const iconMap = { motor: Zap, range: Battery, speed: Gauge, battery: Battery };
-        return iconMap[key.toLowerCase()] || Zap;
+        const iconMap = {
+            motor: Zap,
+            range: Battery,
+            speed: Gauge,
+            battery: Battery,
+            wheels: Box,
+            brakeSystem: Shield,
+            dimension: Maximize,
+            limitedWeight: Weight,
+            chassis: Settings,
+            lightDisplay: Lightbulb,
+            controller: Activity
+        };
+        return iconMap[key] || Zap;
     }, []);
 
     const searchBikes = useCallback((bikes, query) => {
         if (!query?.trim()) return bikes;
         const searchTerm = query.toLowerCase().trim();
-        
+
         return bikes.filter(bike => {
             const searchableFields = [
                 bike.name, bike.category, bike.specifications?.motor,
@@ -90,26 +104,26 @@ const BikeModels = ({ bikes: initialBikes = [] }) => {
             const speed = parseInt(bike.specifications?.speed?.toString().replace(/\D/g, '') || '0');
             const range = parseInt(bike.specifications?.range?.toString().replace(/\D/g, '') || '0');
             return speed >= speedRange[0] && speed <= speedRange[1] &&
-                   range >= rangeFilter[0] && range <= rangeFilter[1];
+                range >= rangeFilter[0] && range <= rangeFilter[1];
         });
 
         if (batteryType !== 'all') {
-            filtered = filtered.filter(bike => 
-                bike.specifications?.batteryType === batteryType || 
+            filtered = filtered.filter(bike =>
+                bike.specifications?.batteryType === batteryType ||
                 bike.specifications?.battery === batteryType
             );
         }
 
         if (motorType !== 'all') {
-            filtered = filtered.filter(bike => 
-                bike.specifications?.motorType === motorType || 
+            filtered = filtered.filter(bike =>
+                bike.specifications?.motorType === motorType ||
                 bike.specifications?.motor === motorType
             );
         }
 
         if (chargingType !== 'all') {
-            filtered = filtered.filter(bike => 
-                bike.specifications?.chargingType === chargingType || 
+            filtered = filtered.filter(bike =>
+                bike.specifications?.chargingType === chargingType ||
                 bike.specifications?.charging === chargingType
             );
         }
@@ -139,7 +153,7 @@ const BikeModels = ({ bikes: initialBikes = [] }) => {
                     bValue = (b.name || '').toLowerCase();
                     break;
             }
-            return sortOrder === 'asc' ? 
+            return sortOrder === 'asc' ?
                 (aValue > bValue ? 1 : aValue < bValue ? -1 : 0) :
                 (aValue < bValue ? 1 : aValue > bValue ? -1 : 0);
         });
@@ -207,129 +221,80 @@ const BikeModels = ({ bikes: initialBikes = [] }) => {
     );
 
     const renderBikeCard = (bike, index) => (
-        <div key={bike._id || index} className="group">
-            {/* Bike Header */}
-            <div className="text-center mb-8">
-                <div className="inline-block mb-4 flex flex-wrap items-center justify-center gap-3">
-                    <span className="px-6 py-2 bg-gradient-to-r from-yellow-500 to-yellow-700 text-white rounded-full text-sm font-semibold">
-                        {bike.category || 'Uncategorized'}
-                    </span>
+        <motion.div
+            layout
+            key={bike._id || index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100 flex flex-col h-full group"
+            onClick={() => setSelectedBike(bike)}
+        >
+            {/* Product Image */}
+            <div className="relative h-64 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                <img
+                    src={bike.imageUrl || bike.image}
+                    alt={bike.name}
+                    className="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute top-4 left-4 flex flex-col gap-2">
+                    <div className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md uppercase tracking-wider">
+                        {bike.category}
+                    </div>
                     {bike.featured && (
-                        <span className="px-3 py-1 bg-blue-700 text-white rounded-full text-xs font-semibold flex items-center gap-1">
-                            <Star className="h-3 w-3" fill="currentColor" />
-                            FEATURED
-                        </span>
+                        <div className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md flex items-center gap-1">
+                            <Star size={10} fill="currentColor" /> FEATURED
+                        </div>
                     )}
-                    {bike.available === false && (
-                        <span className="px-3 py-1 bg-gray-500 text-white rounded-full text-xs font-semibold">
-                            OUT OF STOCK
-                        </span>
-                    )}
-                </div>
-                <h3 className="text-5xl font-serif font-bold text-gray-800 group-hover:text-green-700 transition-colors duration-300">
-                    {bike.name || 'Unnamed Bike'}
-                </h3>
-                <div className="text-center text-gray-600 mt-4">
-                    <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-lg font-medium">
-                        Contact for Pricing
-                    </span>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                    {bike.specifications && Object.keys(bike.specifications).length > 0 && (
-                        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-green-100 hover:shadow-xl transition-all duration-300">
-                            <div className="flex items-center gap-2 mb-4">
-                                <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-emerald-700 rounded-lg flex items-center justify-center">
-                                    <Gauge className="w-4 h-4 text-white" />
-                                </div>
-                                <h4 className="text-xl font-bold text-gray-800">Performance Specs</h4>
-                            </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-                                {Object.entries(bike.specifications).map(([key, value], i) => {
-                                    const IconComponent = getSpecIcon(key);
-                                    return (
-                                        <div key={i} className="flex items-center gap-3 p-1 bg-gradient-to-r from-emerald-50 to-green-200 rounded-lg">
-                                            <IconComponent className="w-4 h-4 text-green-700" />
-                                            <div className="flex-1">
-                                                <span className="text-sm text-gray-600 capitalize">
-                                                    {key.replace(/([A-Z])/g, ' $1').toLowerCase()}:
-                                                </span>
-                                                <span className="ml-2 font-semibold text-gray-800">{value}</span>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    )}
+            {/* Product Details */}
+            <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{bike.name}</h3>
 
-                    {/* Features */}
-                    {bike.features && bike.features.length > 0 && (
-                        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-green-100 hover:shadow-xl transition-all duration-300">
-                            <div className="flex items-center gap-2 mb-4">
-                                <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-teal-700 rounded-lg flex items-center justify-center">
-                                    <Star className="w-4 h-4 text-white" />
-                                </div>
-                                <h4 className="text-xl font-bold text-gray-800">Key Features</h4>
-                            </div>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
-                                {bike.features.map((feature, i) => (
-                                    <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-gradient-to-r from-green-200 to-emerald-50 transition-colors duration-200">
-                                        <div className="w-5 h-5 bg-gradient-to-r from-green-500 to-emerald-700 rounded-full flex items-center justify-center flex-shrink-0">
-                                            <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-gray-700 font-medium">{feature}</span>
-                                    </div>
-                                ))}
-                            </div>
+                <div className="space-y-4 mb-6 flex-grow">
+                    <div className="flex items-center gap-3 text-gray-700">
+                        <div className="p-2 bg-green-50 rounded-lg">
+                            <Zap size={18} className="text-green-600" />
                         </div>
-                    )}
-                </div>
-
-                {/* Image Section */}
-                <div className="relative">
-                    <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-teal-200 rounded-3xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-500"></div>
-                        <div className="relative bg-white rounded-3xl p-4 shadow-2xl group-hover:shadow-3xl transition-all duration-500">
-                            <img
-                                src={bike.imageUrl || `/api/placeholder/500/400`}
-                                alt={bike.name || 'Bike image'}
-                                className="w-100 h-80 pl-8 md:pl-56 sm:pl-24 lg:pl-20 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
-                                loading="lazy"
-                            />
-                            <div className="absolute top-4 right-4 flex flex-col gap-2">
-                                <div className="bg-gradient-to-r from-yellow-700 to-yellow-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                                    ECO-FRIENDLY
-                                </div>
-                                {bike.available === false && (
-                                    <div className="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                                        OUT OF STOCK
-                                    </div>
-                                )}
-                            </div>
+                        <div>
+                            <p className="text-xs text-gray-500 uppercase font-semibold">Motor</p>
+                            <p className="font-bold text-sm truncate max-w-[150px]">{bike.specifications.motor}</p>
                         </div>
                     </div>
-                    {/* Color Options */}
-                    {bike.colors && bike.colors.length > 0 && (
-                        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 mt-10 shadow-lg border border-green-100">
-                            <h4 className="text-lg font-bold text-gray-800 mb-3">Available Colors</h4>
-                            <div className="flex flex-wrap gap-2">
-                                {bike.colors.map((color, i) => (
-                                    <span key={i} className="px-3 py-1 bg-gray-200 text-gray-900 rounded-full text-sm">
-                                        {color}
-                                    </span>
-                                ))}
-                            </div>
+                    <div className="flex items-center gap-3 text-gray-700">
+                        <div className="p-2 bg-blue-50 rounded-lg">
+                            <Gauge size={18} className="text-blue-600" />
                         </div>
-                    )}
+                        <div>
+                            <p className="text-xs text-gray-500 uppercase font-semibold">Speed</p>
+                            <p className="font-bold text-sm">{bike.specifications.speed}</p>
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-700">
+                        <div className="p-2 bg-purple-50 rounded-lg">
+                            <Activity size={18} className="text-purple-600" />
+                        </div>
+                        <div>
+                            <p className="text-xs text-gray-500 uppercase font-semibold">Controller</p>
+                            <p className="font-bold text-sm">{bike.specifications.controller}</p>
+                        </div>
+                    </div>
                 </div>
+
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedBike(bike);
+                    }}
+                    className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition-colors font-bold flex items-center justify-center gap-2 group/btn mt-auto"
+                >
+                    View Full Specs
+                    <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+                </button>
             </div>
-        </div>
+        </motion.div>
     );
 
     if (initialBikes.length === 0) {
@@ -398,7 +363,7 @@ const BikeModels = ({ bikes: initialBikes = [] }) => {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 bg-gray-50 rounded-lg transition-all duration-300">
                             {renderFilterSelect('Category', selectedCategory, setSelectedCategory, categories, 'All Categories')}
                             {renderFilterSelect('Sort By', sortBy, setSortBy, ['name', 'category', 'range', 'speed'], 'Name')}
-                            
+
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Order</label>
                                 <button
@@ -449,10 +414,127 @@ const BikeModels = ({ bikes: initialBikes = [] }) => {
                         </button>
                     </div>
                 ) : (
-                    <div className="space-y-20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
                         {filteredAndSortedBikes.map(renderBikeCard)}
                     </div>
                 )}
+
+                {/* Detailed Modal */}
+                <AnimatePresence>
+                    {selectedBike && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+                            onClick={() => setSelectedBike(null)}
+                        >
+                            <motion.div
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.9, opacity: 0 }}
+                                className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <div className="relative flex-grow overflow-hidden flex flex-col">
+                                    {/* Close Button */}
+                                    <button
+                                        onClick={() => setSelectedBike(null)}
+                                        className="absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700 transition-colors z-[60] shadow-lg"
+                                    >
+                                        <X size={24} />
+                                    </button>
+
+                                    {/* Modal Content */}
+                                    <div className="grid md:grid-cols-2 gap-0 flex-grow overflow-hidden">
+                                        {/* Left Side - Image */}
+                                        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-8 flex items-center justify-center h-[300px] md:h-full flex-shrink-0">
+                                            <img
+                                                src={selectedBike.imageUrl || selectedBike.image}
+                                                alt={selectedBike.name}
+                                                className="w-full h-full object-contain drop-shadow-2xl"
+                                            />
+                                        </div>
+
+                                        {/* Right Side - Specifications */}
+                                        <div className="p-8 overflow-y-auto custom-scrollbar flex-grow bg-white" style={{ scrollbarWidth: 'thin', scrollbarColor: '#166534 #f3f4f6' }}>
+                                            <div className="flex flex-col mb-6">
+                                                <span className="text-green-600 font-bold tracking-widest text-xs uppercase mb-1">{selectedBike.category}</span>
+                                                <h2 className="text-3xl font-bold text-gray-900">{selectedBike.name}</h2>
+                                                <div className="w-16 h-1 bg-green-500 rounded-full mt-2"></div>
+                                            </div>
+
+                                            <div className="space-y-4">
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                    {Object.entries(selectedBike.specifications).map(([key, value]) => {
+                                                        const IconComponent = getSpecIcon(key);
+                                                        return (
+                                                            <div key={key} className="bg-gray-50 p-3 rounded-xl border border-gray-100 flex items-start gap-3">
+                                                                <div className="p-2 bg-white rounded-lg shadow-sm">
+                                                                    <IconComponent size={16} className="text-green-600" />
+                                                                </div>
+                                                                <div>
+                                                                    <span className="text-[10px] text-gray-400 block font-bold uppercase tracking-tight">
+                                                                        {key.replace(/([A-Z])/g, ' $1').toLowerCase()}
+                                                                    </span>
+                                                                    <p className="font-semibold text-gray-900 text-xs sm:text-sm">{value}</p>
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+
+                                                {/* Premium Features */}
+                                                <div className="bg-green-50 p-5 rounded-2xl border border-green-100 shadow-sm mt-6">
+                                                    <span className="text-xs text-green-700 block mb-4 font-bold uppercase tracking-wider flex items-center gap-2">
+                                                        <Shield size={14} /> Premium Features
+                                                    </span>
+                                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                                        {selectedBike.features.map((feature, idx) => (
+                                                            <div key={idx} className="flex items-center gap-2 bg-white/60 p-2 rounded-lg border border-green-50">
+                                                                <Activity size={12} className="text-green-600" />
+                                                                <span className="text-xs font-medium text-gray-800">{feature}</span>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+
+                                                {/* Color Options */}
+                                                {selectedBike.colors && (
+                                                    <div className="mt-6">
+                                                        <span className="text-xs text-gray-400 block mb-3 font-bold uppercase tracking-wider">Available Colors</span>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {selectedBike.colors.map(color => (
+                                                                <span key={color} className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium border border-gray-200">
+                                                                    {color}
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {/* Call to Action */}
+                                                <div className="bg-gray-900 text-white p-6 rounded-2xl mt-8 shadow-xl">
+                                                    <h4 className="font-bold mb-4 flex items-center gap-2 text-green-400 text-sm">
+                                                        <Info size={16} /> Interested in this model?
+                                                    </h4>
+                                                    <div className="flex flex-col sm:flex-row gap-3">
+                                                        <a href="tel:9117031733" className="flex-1 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 p-3 rounded-xl transition-colors font-bold text-sm">
+                                                            Call Sales
+                                                        </a>
+                                                        <a href="/evdealershipcontact" className="flex-1 flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 p-3 rounded-xl border border-gray-700 transition-colors font-bold text-sm">
+                                                            Get Quote
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </section>
     );
