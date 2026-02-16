@@ -24,10 +24,11 @@ import OurTeam from './pages/OurTeam/ourTeam';
 import Scooty from './pages/Scooty/scooty';
 import BatteryPage from './pages/Battery/battery';
 import Careers from './pages/Careers/careers';
+import Gallery from './pages/Gallery/gallery';
 function App() {
   return (
     <Routes>
-  
+
       <Route path="/" element={<ParentHome />} />
       <Route
         path="/*"
@@ -40,25 +41,26 @@ function App() {
               <Route path="/carhub/services" element={<Service />} />
               <Route path="/appointment" element={<AppointForm />} />
               <Route path="/carhub/roadside-services" element={<RoadSideAssistance />} />
-              <Route path="/carhub/contract-form" element={<ContractServicesPage/>}/>
-              <Route path='/under-progress' element={<UnderProgress/>}/>
+              <Route path="/carhub/contract-form" element={<ContractServicesPage />} />
+              <Route path='/under-progress' element={<UnderProgress />} />
             </Routes>
           </Layout>
         }
       />
-      <Route path='/ev-dealership-opportunity' element={<EVLandingPage/>}/>
-      <Route path='/evbikemodels' element={<EvbikePage/>}/>
-      <Route path='/evdealershipcontact' element={<DealershipContact/>}/>
-      <Route path='/evdealership' element={<EVDealership/> }   />
-      <Route path='/blog' element={<Blog/>}/>
-      <Route path='/blog/:id' element={<BlogDetail/>}/>
-      <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
-      <Route path='/terms-conditions' element={<TermsConditions/>}/>
-      <Route path='/our-team' element={<OurTeam/>}/>
-      <Route path='/scooty' element={<Scooty/>}/>
-      <Route path='/battery' element={<BatteryPage/>}/>
-      <Route path='/careers' element={<Careers/>}/>
-    </Routes> 
+      <Route path='/ev-dealership-opportunity' element={<EVLandingPage />} />
+      <Route path='/evbikemodels' element={<EvbikePage />} />
+      <Route path='/evdealershipcontact' element={<DealershipContact />} />
+      <Route path='/evdealership' element={<EVDealership />} />
+      <Route path='/blog' element={<Blog />} />
+      <Route path='/blog/:id' element={<BlogDetail />} />
+      <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+      <Route path='/terms-conditions' element={<TermsConditions />} />
+      <Route path='/our-team' element={<OurTeam />} />
+      <Route path='/scooty' element={<Scooty />} />
+      <Route path='/battery' element={<BatteryPage />} />
+      <Route path='/careers' element={<Careers />} />
+      <Route path='/gallery' element={<Gallery />} />
+    </Routes>
   );
 }
 

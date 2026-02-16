@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, TrendingUp, Target, DollarSign, Award, Megaphone, Headphones, ExternalLink, Factory, Plus, MapPin, Phone, Star, ArrowRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, TrendingUp, Target, DollarSign, Award, Megaphone, Headphones, ExternalLink, Factory, Zap, Plus, Shield, Smartphone, Wrench, Leaf, Calculator, MapPin, Phone, Mail, MessageCircle, Star, CheckCircle, ArrowRight, Menu, X, Gauge, Battery, Activity, Info, Settings } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { AnimatePresence, motion } from "motion/react";
+import bike1 from "../../assets/bike1.png";
+import bike2 from "../../assets/bike2.png";
+import bike3 from "../../assets/bike3.png";
+import bike4 from "../../assets/bike4.png";
+import bike5 from "../../assets/bike5.png";
+import bike6 from "../../assets/bike6.png";
+import bike7 from "../../assets/bike7.png";
+import bike8 from "../../assets/bike8.png";
+import bike9 from "../../assets/bike9.png";
 import EvNavbar from '../../components/navbar/evNav';
 import EVMarket from './evmarket';
 import WhatWeProvide from './whatweprovide';
@@ -32,27 +42,180 @@ const EVLandingPage = () => {
         }
     }, [location]);
 
+    const [selectedModel, setSelectedModel] = useState(null);
+    const [productIndex, setProductIndex] = useState(0);
+
     const models = [
         {
-            name: 'SE ULTRA 7.2KW',
-            batteryType: 'LIPO 4',
-            range: '418km',
-            speed: '60-70km/h',
-            image: '/api/placeholder/400/300',
+            id: 1,
+            name: "X LENT WS1",
+            image: bike1,
+            motor: "1200W (Brushless DC motor, waterproof)",
+            controller: "60/72V",
+            speed: "25kmph",
+            wheels: "12''/12''",
+            brake: "Front Disc / Rear Drum",
+            dimension: "1800*780*1150",
+            limitedWeight: "220 Kg",
+            chassis: "High Strength Tubular Frame",
+            lightDisplay: "DRL Light, Digital LED Speedometer",
+            features: [
+                "Remote Key", "DRLs", "Mat", "Footrest", "USB",
+                "3 Speed", "Reverse Gears", "LED Headlight",
+                "Cruise Control", "Anti theft alarm"
+            ]
         },
         {
-            name: 'SE X4',
-            batteryType: 'GRAPHENE',
-            range: '60-70+km',
-            speed: '25km/h',
-            image: '/api/placeholder/400/300',
+            id: 2,
+            name: "X LENT WS+",
+            image: bike2,
+            motor: "1500W (Brushless DC motor, waterproof)",
+            controller: "60/72V",
+            speed: "25kmph",
+            wheels: "12''/12''",
+            brake: "Front Disc / Rear Drum",
+            dimension: "1800*780*1150",
+            limitedWeight: "220 Kg",
+            chassis: "High Strength Tubular Frame",
+            lightDisplay: "DRL Light, Digital LED Speedometer",
+            features: [
+                "Remote Key", "DRLs", "Mat", "Footrest", "USB",
+                "3 Speed", "Reverse Gears", "LED Headlight",
+                "Cruise Control", "Anti theft alarm"
+            ]
         },
         {
-            name: 'SE LI 2kw',
-            batteryType: 'LITHIUM',
-            range: '100+km',
-            speed: '25km/h',
-            image: '/api/placeholder/400/300',
+            id: 3,
+            name: "SOLO WS1",
+            image: bike3,
+            motor: "1000W (Brushless DC motor, waterproof)",
+            controller: "48/60/72V",
+            speed: "25kmph",
+            wheels: "Alloy / Iron",
+            brake: "Front Disc / Rear Drum",
+            dimension: "1800*780*1150",
+            limitedWeight: "180 Kg",
+            chassis: "High Strength Tubular Frame",
+            lightDisplay: "DRL Light, Digital LED Speedometer",
+            features: [
+                "Remote Key", "DRLs", "Mat", "Footrest", "USB",
+                "3 Speed", "Reverse Gears", "LED Headlight",
+                "Cruise Control", "Anti theft alarm"
+            ]
+        },
+        {
+            id: 4,
+            name: "DUO WS1",
+            image: bike4,
+            motor: "1000W (Brushless DC motor, waterproof)",
+            controller: "48/60/72V",
+            speed: "25kmph",
+            wheels: "Alloy / Iron",
+            brake: "Front Disc / Rear Drum",
+            dimension: "1800*780*1150",
+            limitedWeight: "180 Kg",
+            chassis: "High Strength Tubular Frame",
+            lightDisplay: "DRL Light, Digital LED Speedometer",
+            features: [
+                "Remote Key", "DRLs", "Mat", "Footrest", "USB",
+                "3 Speed", "Reverse Gears", "LED Headlight",
+                "Cruise Control", "Anti theft alarm"
+            ]
+        },
+        {
+            id: 5,
+            name: "SWIFT WS+",
+            image: bike5,
+            motor: "1400W (Brushless DC motor, waterproof)",
+            controller: "60/72V",
+            speed: "25kmph",
+            wheels: "12''/12''",
+            brake: "Front Disc / Rear Drum",
+            dimension: "1800*780*1150",
+            limitedWeight: "220 Kg",
+            chassis: "High Strength Tubular Frame",
+            lightDisplay: "DRL Light, Digital LED Speedometer",
+            features: [
+                "Remote Key", "DRLs", "Mat", "Footrest", "USB",
+                "3 Speed", "Reverse Gears", "LED Headlight",
+                "Cruise Control", "Anti theft alarm"
+            ]
+        },
+        {
+            id: 6,
+            name: "SWIFT WS1",
+            image: bike6,
+            motor: "1200W (Brushless DC motor, waterproof)",
+            controller: "60/72V",
+            speed: "25kmph",
+            wheels: "Alloy, 12''/12''",
+            brake: "Front Disc / Rear Drum",
+            dimension: "1800*780*1150",
+            limitedWeight: "220 Kg",
+            chassis: "High Strength Tubular Frame",
+            lightDisplay: "DRL Light, Digital LED Speedometer",
+            features: [
+                "Remote Key", "DRLs", "Mat", "Footrest", "USB",
+                "3 Speed", "Reverse Gears", "LED Headlight",
+                "Cruise Control", "Anti theft alarm"
+            ]
+        },
+        {
+            id: 7,
+            name: "SWIFT WS PRO",
+            image: bike7,
+            motor: "1400W (Brushless DC motor, waterproof)",
+            controller: "60/72V",
+            speed: "25kmph",
+            wheels: "12''/12''",
+            brake: "Front Disc / Rear Drum",
+            dimension: "1800*780*1150",
+            limitedWeight: "220 Kg",
+            chassis: "High Strength Tubular Frame",
+            lightDisplay: "DRL Light, Digital LED Speedometer",
+            features: [
+                "Remote Key", "DRLs", "Mat", "Footrest", "USB",
+                "3 Speed", "Reverse Gears", "LED Headlight",
+                "Cruise Control", "Anti theft alarm"
+            ]
+        },
+        {
+            id: 8,
+            name: "VISTO WS1",
+            image: bike8,
+            motor: "1200W (Brushless DC motor, waterproof)",
+            controller: "60/72V",
+            speed: "25kmph",
+            wheels: "12''/12''",
+            brake: "Front Disc / Rear Drum",
+            dimension: "1800*780*1150",
+            limitedWeight: "220 Kg",
+            chassis: "High Strength Tubular Frame",
+            lightDisplay: "DRL Light, Digital LED Speedometer",
+            features: [
+                "Remote Key", "DRLs", "Mat", "Footrest", "USB",
+                "3 Speed", "Reverse Gears", "LED Headlight",
+                "Cruise Control", "Anti theft alarm"
+            ]
+        },
+        {
+            id: 9,
+            name: "VISTO WS+",
+            image: bike9,
+            motor: "1200W (Brushless DC motor, waterproof)",
+            controller: "60/72V",
+            speed: "25kmph",
+            wheels: "Alloy, 12''/12''",
+            brake: "Front Disc / Rear Drum",
+            dimension: "1800*780*1150",
+            limitedWeight: "220 Kg",
+            chassis: "High Strength Tubular Frame",
+            lightDisplay: "DRL Light, Digital LED Speedometer",
+            features: [
+                "Remote Key", "DRLs", "Mat", "Footrest", "USB",
+                "3 Speed", "Reverse Gears", "LED Headlight",
+                "Cruise Control", "Anti theft alarm"
+            ]
         }
     ];
 
@@ -88,7 +251,8 @@ const EVLandingPage = () => {
             description: 'Ensure customer satisfaction and loyalty with our comprehensive service infrastructure. Complete access to genuine spares, technical support, and service training keeps your customers happy and generates repeat business opportunities.'
         }
     ];
-    const [testimonials, setTestimonials] = useState([
+
+    const testimonials = [
         {
             id: 1,
             name: 'Rajesh Motors',
@@ -100,63 +264,52 @@ const EVLandingPage = () => {
         {
             id: 2,
             name: 'Green Wheels Dealership',
-            role: 'Multi-brand Dealer, Bangalore',
-            text: 'Excellent support from WS team. Training programs and marketing assistance helped us become the top dealer in our region.',
+            role: 'State Distributor, Bihar',
+            text: 'The support system is unparalleled. From branding to technical training, they guide you at every step.',
             rating: 5,
             date: '2024-01-20'
         },
         {
             id: 3,
-            name: 'Speed Zone Motors',
-            role: 'New Dealer Partner, Delhi NCR',
-            text: 'Started with zero EV knowledge. WS Mobility\'s comprehensive training made us EV experts. ROI exceeded expectations!',
-            rating: 5,
-            date: '2024-01-25'
-        },
-        {
-            id: 4,
-            name: 'City Bike Hub',
-            role: 'Franchise Owner, Pune',
-            text: 'Low investment, high returns. The dealership model is dealer-friendly with great profit margins.',
+            name: 'Eco Drive Solutions',
+            role: 'Retail Partner, Bangalore',
+            text: 'Customer response to WS models is amazing. The build quality and range are the best in this segment.',
             rating: 4,
-            date: '2024-02-01'
-        },
-        {
-            id: 5,
-            name: 'Electric Avenue',
-            role: 'Dealership Partner, Hyderabad',
-            text: 'Customer demand for WS bikes is incredible. Inventory moves fast, profits are consistent.',
-            rating: 5,
             date: '2024-02-05'
         },
         {
-            id: 6,
-            name: 'Future Mobility Solutions',
-            role: 'Service & Sales Center, Chennai',
-            text: 'Technical support is outstanding. Spare parts availability and warranty claims process is seamless.',
+            id: 4,
+            name: 'Maheshwari EV Hub',
+            role: 'Exclusive Dealer, Pune',
+            text: 'We reached our break-even point in just 4 months. The ROI is significantly higher than other brands we evaluated.',
             rating: 5,
-            date: '2024-02-10'
+            date: '2024-02-12'
+        },
+        {
+            id: 5,
+            name: 'Bharat Electric',
+            role: 'Multi-brand Outlet, Delhi',
+            text: 'Even though we sell other brands, WS Mobility bikes are our top performers in the premium segment.',
+            rating: 5,
+            date: '2024-02-18'
         }
-    ]);
+    ];
 
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [showAddForm, setShowAddForm] = useState(false);
-    const [newReview, setNewReview] = useState({
-        name: '',
-        role: '',
-        text: '',
-        rating: 5
-    });
     const [itemsPerView, setItemsPerView] = useState(3);
+    const [testimonialIndex, setTestimonialIndex] = useState(0);
+    const [testimonialItemsPerView, setTestimonialItemsPerView] = useState(3);
 
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 640) {
                 setItemsPerView(1);
+                setTestimonialItemsPerView(1);
             } else if (window.innerWidth < 1024) {
                 setItemsPerView(2);
+                setTestimonialItemsPerView(2);
             } else {
                 setItemsPerView(3);
+                setTestimonialItemsPerView(3);
             }
         };
 
@@ -165,72 +318,53 @@ const EVLandingPage = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Auto-scroll functionality
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentIndex((prevIndex) => {
-                const totalSlides = Math.ceil(testimonials.length / itemsPerView);
-                const currentSlide = Math.floor(prevIndex / itemsPerView);
-                if (currentSlide >= totalSlides - 1) {
-                    return 0;
-                }
-                return prevIndex + itemsPerView;
-            });
-        }, 4000);
-
-        return () => clearInterval(timer);
-    }, [testimonials.length, itemsPerView]);
-
-    const nextSlide = () => {
-        const totalSlides = Math.ceil(testimonials.length / itemsPerView);
-        const currentSlide = Math.floor(currentIndex / itemsPerView);
+    const nextProduct = () => {
+        const totalSlides = Math.ceil(models.length / itemsPerView);
+        const currentSlide = Math.floor(productIndex / itemsPerView);
         if (currentSlide < totalSlides - 1) {
-            setCurrentIndex(prev => prev + itemsPerView);
+            setProductIndex(prev => prev + itemsPerView);
         } else {
-            setCurrentIndex(0);
+            setProductIndex(0);
         }
     };
 
-    const prevSlide = () => {
-        const currentSlide = Math.floor(currentIndex / itemsPerView);
+    const prevProduct = () => {
+        const currentSlide = Math.floor(productIndex / itemsPerView);
         if (currentSlide > 0) {
-            setCurrentIndex(prev => prev - itemsPerView);
+            setProductIndex(prev => prev - itemsPerView);
         } else {
-            const totalSlides = Math.ceil(testimonials.length / itemsPerView);
-            setCurrentIndex((totalSlides - 1) * itemsPerView);
+            const totalSlides = Math.ceil(models.length / itemsPerView);
+            setProductIndex((totalSlides - 1) * itemsPerView);
         }
     };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewReview(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+    const totalProductSlides = Math.ceil(models.length / itemsPerView);
+    const currentProductSlide = Math.floor(productIndex / itemsPerView);
 
-    const handleRatingChange = (rating) => {
-        setNewReview(prev => ({
-            ...prev,
-            rating
-        }));
-    };
+    const totalTestimonialSlides = Math.ceil(testimonials.length / testimonialItemsPerView);
+    const currentTestimonialSlide = Math.floor(testimonialIndex / testimonialItemsPerView);
 
-    const handleSubmitReview = () => {
-        if (newReview.name && newReview.role && newReview.text) {
-            const review = {
-                id: testimonials.length + 1,
-                ...newReview,
-                date: new Date().toISOString().split('T')[0]
-            };
-            setTestimonials(prev => [review, ...prev]);
-            setNewReview({ name: '', role: '', text: '', rating: 5 });
-            setShowAddForm(false);
+    const nextTestimonial = () => {
+        if (currentTestimonialSlide < totalTestimonialSlides - 1) {
+            setTestimonialIndex(prev => prev + testimonialItemsPerView);
+        } else {
+            setTestimonialIndex(0);
         }
     };
 
-    const totalSlides = Math.ceil(testimonials.length / itemsPerView);
-    const currentSlide = Math.floor(currentIndex / itemsPerView);
+    const prevTestimonial = () => {
+        if (currentTestimonialSlide > 0) {
+            setTestimonialIndex(prev => prev - testimonialItemsPerView);
+        } else {
+            setTestimonialIndex((totalTestimonialSlides - 1) * testimonialItemsPerView);
+        }
+    };
+
+    // Auto-scroll for testimonials
+    useEffect(() => {
+        const timer = setInterval(nextTestimonial, 5000);
+        return () => clearInterval(timer);
+    }, [currentTestimonialSlide, totalTestimonialSlides]);
 
 
     return (
@@ -291,48 +425,120 @@ const EVLandingPage = () => {
                         <p className="text-gray-600 text-2xl max-w-2xl mx-auto">High-demand electric vehicles with attractive profit margins</p>
                     </div>
 
-                    {/* Product Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {models.map((model, index) => (
-                            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                                {/* Product Image */}
-                                <div className="relative h-64 bg-gradient-to-br from-amber-50 to-orange-50 overflow-hidden">
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
-                                            <span className="text-gray-400 text-sm">Product Image</span>
+                    <div className="relative pt-8">
+                        <div className="overflow-hidden">
+                            <div
+                                className="flex transition-transform duration-500 ease-out"
+                                style={{
+                                    transform: `translateX(-${currentProductSlide * 100}%)`
+                                }}
+                            >
+                                {Array.from({ length: totalProductSlides }).map((_, slideIndex) => (
+                                    <div key={slideIndex} className="w-full flex-shrink-0">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2">
+                                            {models
+                                                .slice(slideIndex * itemsPerView, (slideIndex + 1) * itemsPerView)
+                                                .map((model) => (
+                                                    <div
+                                                        key={model.id}
+                                                        className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100 flex flex-col h-full"
+                                                        onClick={() => setSelectedModel(model)}
+                                                    >
+                                                        {/* Product Image */}
+                                                        <div className="relative h-64 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                                                            <img
+                                                                src={model.image}
+                                                                alt={model.name}
+                                                                className="w-full h-full object-contain p-6 transition-transform duration-500 hover:scale-110"
+                                                            />
+                                                            <div className="absolute top-4 left-4">
+                                                                <div className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md uppercase tracking-wider">
+                                                                    Premium
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Product Details */}
+                                                        <div className="p-6 flex flex-col flex-grow">
+                                                            <h3 className="text-2xl font-bold text-gray-900 mb-4">{model.name}</h3>
+
+                                                            <div className="space-y-4 mb-6 flex-grow">
+                                                                <div className="flex items-center gap-3 text-gray-700">
+                                                                    <div className="p-2 bg-green-50 rounded-lg">
+                                                                        <Zap size={18} className="text-green-600" />
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="text-xs text-gray-500 uppercase font-semibold">Motor</p>
+                                                                        <p className="font-bold text-sm truncate max-w-[150px]">{model.motor}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="flex items-center gap-3 text-gray-700">
+                                                                    <div className="p-2 bg-blue-50 rounded-lg">
+                                                                        <Gauge size={18} className="text-blue-600" />
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="text-xs text-gray-500 uppercase font-semibold">Speed</p>
+                                                                        <p className="font-bold text-sm">{model.speed}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="flex items-center gap-3 text-gray-700">
+                                                                    <div className="p-2 bg-purple-50 rounded-lg">
+                                                                        <Battery size={18} className="text-purple-600" />
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="text-xs text-gray-500 uppercase font-semibold">Controller</p>
+                                                                        <p className="font-bold text-sm">{model.controller}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    setSelectedModel(model);
+                                                                }}
+                                                                className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition-colors font-bold flex items-center justify-center gap-2 group mt-auto"
+                                                            >
+                                                                View Full Specs
+                                                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                ))}
                                         </div>
                                     </div>
-                                </div>
-
-                                {/* Product Details */}
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-2">{model.name}</h3>
-                                    
-                                    <div className="space-y-3 mb-6">
-                                        <div>
-                                            <span className="text-sm text-gray-500">Battery Type</span>
-                                            <p className="font-semibold text-gray-900">{model.batteryType}</p>
-                                        </div>
-                                        <div>
-                                            <span className="text-sm text-gray-500">Range</span>
-                                            <p className="font-semibold text-gray-900">{model.range}</p>
-                                        </div>
-                                        <div>
-                                            <span className="text-sm text-gray-500">Top speed</span>
-                                            <p className="font-semibold text-gray-900">{model.speed}</p>
-                                        </div>
-                                    </div>
-
-                                    {/* Read More Link */}
-                                    <button
-                                        onClick={() => {}}
-                                        className="text-green-600 hover:text-green-700 font-semibold text-sm transition-colors duration-300 inline-flex items-center bg-transparent border-none cursor-pointer p-0"
-                                    >
-                                        Read more
-                                        <ArrowRight size={16} className="ml-1" />
-                                    </button>
-                                </div>
+                                ))}
                             </div>
+                        </div>
+
+                        {/* Navigation Arrows */}
+                        {totalProductSlides > 1 && (
+                            <>
+                                <button
+                                    onClick={prevProduct}
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 bg-white rounded-full p-4 shadow-xl text-gray-800 hover:text-green-600 transition-all z-10 border border-gray-100 hover:scale-110"
+                                >
+                                    <ChevronLeft size={24} />
+                                </button>
+                                <button
+                                    onClick={nextProduct}
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 bg-white rounded-full p-4 shadow-xl text-gray-800 hover:text-green-600 transition-all z-10 border border-gray-100 hover:scale-110"
+                                >
+                                    <ChevronRight size={24} />
+                                </button>
+                            </>
+                        )}
+                    </div>
+
+                    {/* Pagination Dots */}
+                    <div className="flex justify-center mt-8 space-x-2">
+                        {Array.from({ length: totalProductSlides }).map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setProductIndex(index * itemsPerView)}
+                                className={`h-2 rounded-full transition-all duration-300 ${currentProductSlide === index ? 'w-8 bg-green-600' : 'w-2 bg-gray-300'
+                                    }`}
+                            />
                         ))}
                     </div>
                 </div>
@@ -630,266 +836,222 @@ const EVLandingPage = () => {
                 </div>
             </div>
 
-            {/* Testimonials */}
-            <section id='success-stories' className="py-16 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 relative overflow-hidden">
+
+
+            {/* Contact */}
+            {/* Success Stories Section */}
+            <section id='success-stories' className="py-20 bg-gradient-to-br from-white via-green-50 to-emerald-100 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20">
                     <div className="absolute top-20 left-10 w-32 h-32 bg-green-300 rounded-full blur-xl animate-pulse"></div>
                     <div className="absolute top-40 right-20 w-24 h-24 bg-emerald-300 rounded-full blur-lg animate-bounce delay-1000"></div>
-                    <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-teal-300 rounded-full blur-2xl animate-pulse delay-500"></div>
-                    <div className="absolute bottom-40 right-1/3 w-28 h-28 bg-lime-300 rounded-full blur-lg animate-ping delay-700"></div>
                 </div>
 
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(34,197,94,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.05)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div className="text-center mb-12">
+                    <div className="text-center mb-16">
                         <div className="inline-block mb-4">
-                            <h2 className="text-3xl md:text-4xl font-bold bg-teal-900 bg-clip-text text-transparent mb-4">
-                                Successful Dealer Partners
+                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 uppercase tracking-tight">
+                                Success Stories
                             </h2>
-                            <div className="h-1 w-32 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full animate-pulse"></div>
+                            <div className="h-1.5 w-24 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full"></div>
                         </div>
-                        <p className="text-gray-700 max-w-2xl mx-auto mb-6 text-lg">
-                            Join our growing network of profitable EV dealerships across India
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                            Empowering entrepreneurs across India to build a sustainable and profitable future in electric mobility.
                         </p>
-                        <button
-                            onClick={() => setShowAddForm(true)}
-                            className="group inline-flex items-center gap-2 bg-gradient-to-r from-green-700 to-emerald-900 text-white px-4 py-4 rounded-2xl hover:from-green-400 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:text-yellow-300 hover:shadow-green-500/25 border border-green-400/20 relative overflow-hidden"
-                        >
-                            <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
-                            Share Your Experience
-                            <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-700 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
-                        </button>
                     </div>
 
                     <div className="relative">
-                        <div className="overflow-hidden pt-8 pb-8 rounded-xl">
+                        <div className="overflow-hidden py-4">
                             <div
-                                className="flex transition-transform duration-300 ease-out"
+                                className="flex transition-transform duration-500 ease-in-out"
                                 style={{
-                                    transform: `translateX(-${currentSlide * 100}%)`
+                                    transform: `translateX(-${currentTestimonialSlide * 100}%)`
                                 }}
                             >
-                                {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+                                {Array.from({ length: totalTestimonialSlides }).map((_, slideIndex) => (
                                     <div key={slideIndex} className="w-full flex-shrink-0">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-2">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
                                             {testimonials
-                                                .slice(slideIndex * itemsPerView, (slideIndex + 1) * itemsPerView)
+                                                .slice(slideIndex * testimonialItemsPerView, (slideIndex + 1) * testimonialItemsPerView)
                                                 .map((testimonial) => (
-                                                    <div key={testimonial.id} className="group relative bg-gradient-to-br from-white/90 to-green-50/90 backdrop-blur-sm rounded-2xl p-6 shadow-2xl hover:shadow-green-500/25 transition-all duration-500 transform hover:-translate-y-6 hover:scale-105 border border-green-200/50 hover:border-green-400/50 overflow-hidden">
-
-                                                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 via-emerald-500/20 to-teal-500/20 rounded-2xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                                                        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-400/20 to-transparent rounded-bl-3xl"></div>
-
-                                                        <div className="relative z-10">
-                                                            <div className="flex items-center justify-between mb-4">
-                                                                <div className="flex items-center space-x-1">
-                                                                    {[...Array(5)].map((_, i) => (
-                                                                        <Star
-                                                                            key={i}
-                                                                            className={`w-5 h-5 transition-all duration-300 ${i < testimonial.rating
-                                                                                ? 'text-yellow-400 fill-current group-hover:scale-110'
-                                                                                : 'text-gray-300'
-                                                                                }`}
-                                                                        />
-                                                                    ))}
-                                                                </div>
-                                                                <span className="text-xs text-green-700 bg-green-100/80 px-3 py-1 rounded-full font-medium backdrop-blur">
-                                                                    {new Date(testimonial.date).toLocaleDateString('en-IN')}
-                                                                </span>
+                                                    <div key={testimonial.id} className="bg-white rounded-3xl p-8 shadow-xl border border-green-100 hover:shadow-2xl hover:border-green-300 transition-all duration-300 group">
+                                                        <div className="flex items-center gap-1 mb-6">
+                                                            {[...Array(5)].map((_, i) => (
+                                                                <Star
+                                                                    key={i}
+                                                                    size={18}
+                                                                    className={`${i < testimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-200'} transition-colors`}
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                        <p className="text-gray-700 mb-8 italic leading-relaxed text-lg">
+                                                            "{testimonial.text}"
+                                                        </p>
+                                                        <div className="flex items-center gap-4">
+                                                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-bold text-xl">
+                                                                {testimonial.name.charAt(0)}
                                                             </div>
-                                                            <p className="text-gray-700 mb-4 leading-relaxed text-sm italic font-medium">
-                                                                "{testimonial.text}"
-                                                            </p>
-                                                            <div className="border-t border-green-200 pt-4 mt-auto">
-                                                                <p className="font-bold text-gray-900 text-base group-hover:text-green-700 transition-colors duration-300">{testimonial.name}</p>
-                                                                <p className="text-sm text-green-600 font-medium">{testimonial.role}</p>
+                                                            <div>
+                                                                <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
+                                                                <p className="text-sm text-green-600">{testimonial.role}</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 ))}
-
-                                            {Array.from({
-                                                length: Math.max(0, itemsPerView - testimonials.slice(slideIndex * itemsPerView, (slideIndex + 1) * itemsPerView).length)
-                                            }).map((_, emptyIndex) => (
-                                                <div key={`empty-${emptyIndex}`} className="invisible">
-                                                    <div className="bg-white rounded-lg p-6 h-64"></div>
-                                                </div>
-                                            ))}
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Navigation Buttons */}
-                        {totalSlides > 1 && (
+                        {/* Navigation Arrows */}
+                        {totalTestimonialSlides > 1 && (
                             <>
                                 <button
-                                    onClick={prevSlide}
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white/90 backdrop-blur rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:bg-green-50 disabled:opacity-50 disabled:cursor-not-allowed border border-green-200/50 hover:border-green-400/50"
-                                    disabled={currentSlide === 0}
+                                    onClick={prevTestimonial}
+                                    className="absolute left-[-20px] top-1/2 -translate-y-1/2 bg-white text-gray-900 p-4 rounded-full shadow-2xl hover:bg-green-600 hover:text-white transition-all z-20"
                                 >
-                                    <ChevronLeft className="w-5 h-5 text-green-800" />
+                                    <ChevronLeft size={24} />
                                 </button>
                                 <button
-                                    onClick={nextSlide}
-                                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white/90 backdrop-blur rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:bg-green-50 disabled:opacity-50 disabled:cursor-not-allowed border border-green-200/50 hover:border-green-400/50"
-                                    disabled={currentSlide >= totalSlides - 1}
+                                    onClick={nextTestimonial}
+                                    className="absolute right-[-20px] top-1/2 -translate-y-1/2 bg-white text-gray-900 p-4 rounded-full shadow-2xl hover:bg-green-600 hover:text-white transition-all z-20"
                                 >
-                                    <ChevronRight className="w-5 h-5 text-green-800" />
+                                    <ChevronRight size={24} />
                                 </button>
                             </>
                         )}
                     </div>
 
                     {/* Pagination Dots */}
-                    {totalSlides > 1 && (
-                        <div className="flex justify-center mt-8 space-x-2">
-                            {Array.from({ length: totalSlides }).map((_, index) => (
+                    {totalTestimonialSlides > 1 && (
+                        <div className="flex justify-center mt-12 gap-3">
+                            {Array.from({ length: totalTestimonialSlides }).map((_, index) => (
                                 <button
                                     key={index}
-                                    onClick={() => setCurrentIndex(index * itemsPerView)}
-                                    className={`w-3 h-3 rounded-full transition-all duration-200 ${currentSlide === index
-                                        ? 'bg-green-600 scale-110'
-                                        : 'bg-green-300 hover:bg-green-400 hover:scale-105'
-                                        }`}
+                                    onClick={() => setTestimonialIndex(index * testimonialItemsPerView)}
+                                    className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonialSlide === index ? 'bg-green-600 w-8' : 'bg-green-200'}`}
                                 />
                             ))}
                         </div>
                     )}
-
-                    {/* Dealership Network Statistics */}
-                    <div className="mt-12 text-center">
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-                            <div className="bg-white/80 backdrop-blur rounded-xl px-6 py-4 shadow-lg border border-green-200/50 hover:shadow-green-500/25 transition-all duration-300 hover:scale-105">
-                                <div className="text-3xl font-bold text-green-600">{testimonials.length}+</div>
-                                <div className="text-sm text-gray-700 font-medium">Partner Reviews</div>
-                            </div>
-                            <div className="bg-white/80 backdrop-blur rounded-xl px-6 py-4 shadow-lg border border-green-200/50 hover:shadow-green-500/25 transition-all duration-300 hover:scale-105">
-                                <div className="text-3xl font-bold text-emerald-600">500+</div>
-                                <div className="text-sm text-gray-700 font-medium">Active Dealers</div>
-                            </div>
-                            <div className="bg-white/80 backdrop-blur rounded-xl px-6 py-4 shadow-lg border border-green-200/50 hover:shadow-green-500/25 transition-all duration-300 hover:scale-105">
-                                <div className="text-3xl font-bold text-yellow-500">
-                                    {(testimonials.reduce((acc, t) => acc + t.rating, 0) / testimonials.length).toFixed(1)}
-                                </div>
-                                <div className="text-sm text-gray-700 font-medium">Partner Rating</div>
-                            </div>
-                            <div className="bg-white/80 backdrop-blur rounded-xl px-6 py-4 shadow-lg border border-green-200/50 hover:shadow-green-500/25 transition-all duration-300 hover:scale-105">
-                                <div className="text-3xl font-bold text-teal-600">25+</div>
-                                <div className="text-sm text-gray-700 font-medium">States Covered</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+            </section>
 
-                {/* Add Review Modal */}
-                {showAddForm && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                        <div className="bg-white rounded-lg max-w-md w-full p-6">
-                            <div className="flex justify-between items-center mb-4">
-                                <h3 className="text-xl font-bold text-gray-900">Share Your Dealership Experience</h3>
+            <Sendmsg />
+
+            {/* Detailed Modal */}
+            <AnimatePresence>
+                {selectedModel && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-[100] p-4"
+                        onClick={() => setSelectedModel(null)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="relative flex-grow overflow-hidden flex flex-col">
+                                {/* Close Button */}
                                 <button
-                                    onClick={() => setShowAddForm(false)}
-                                    className="text-gray-500 hover:text-gray-700"
+                                    onClick={() => setSelectedModel(null)}
+                                    className="absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700 transition-colors z-20 shadow-lg"
                                 >
                                     <X className="w-6 h-6" />
                                 </button>
-                            </div>
 
-                            <div className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Dealership Name *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={newReview.name}
-                                        onChange={handleInputChange}
-                                        placeholder="e.g., ABC Motors"
-                                        className="w-full px-3 py-2 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                                        required
-                                    />
-                                </div>
+                                {/* Modal Content */}
+                                <div className="grid md:grid-cols-2 gap-0 flex-grow overflow-hidden text-sm">
+                                    {/* Left Side - Image */}
+                                    <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-8 flex items-center justify-center h-[300px] md:h-full flex-shrink-0">
+                                        <img
+                                            src={selectedModel.image}
+                                            alt={selectedModel.name}
+                                            className="w-full h-full object-contain drop-shadow-2xl"
+                                        />
+                                    </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Role & Location *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="role"
-                                        value={newReview.role}
-                                        onChange={handleInputChange}
-                                        placeholder="e.g., Authorized Dealer, Mumbai"
-                                        className="w-full px-3 py-2 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                                        required
-                                    />
-                                </div>
+                                    {/* Right Side - Specifications */}
+                                    <div className="p-8 overflow-y-auto custom-scrollbar flex-grow bg-white" style={{ scrollbarWidth: 'thin', scrollbarColor: '#166534 #f3f4f6' }}>
+                                        <div className="bg-green-700 text-white px-4 py-2 rounded-lg font-bold text-xl mb-6 inline-block shadow-md">
+                                            {selectedModel.name}
+                                        </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Partner Rating *
-                                    </label>
-                                    <div className="flex space-x-1">
-                                        {[1, 2, 3, 4, 5].map((star) => (
-                                            <button
-                                                key={star}
-                                                type="button"
-                                                onClick={() => handleRatingChange(star)}
-                                                className={`w-8 h-8 ${star <= newReview.rating
-                                                    ? 'text-yellow-400'
-                                                    : 'text-gray-300'
-                                                    } hover:text-yellow-400 transition-colors`}
-                                            >
-                                                <Star className="w-full h-full fill-current" />
-                                            </button>
-                                        ))}
+                                        <div className="space-y-4">
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                                    <span className="text-xs text-gray-400 block mb-1 font-bold">MOTOR</span>
+                                                    <p className="font-semibold text-gray-900 text-xs">{selectedModel.motor}</p>
+                                                </div>
+                                                <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                                    <span className="text-xs text-gray-400 block mb-1 font-bold">CONTROLLER</span>
+                                                    <p className="font-semibold text-gray-900">{selectedModel.controller}</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                                    <span className="text-xs text-gray-400 block mb-1 font-bold">SPEED</span>
+                                                    <p className="font-semibold text-gray-900">{selectedModel.speed}</p>
+                                                </div>
+                                                <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                                    <span className="text-xs text-gray-400 block mb-1 font-bold">WHEELS</span>
+                                                    <p className="font-semibold text-gray-900">{selectedModel.wheels}</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                                <span className="text-xs text-gray-400 block mb-1 font-bold">BRAKE</span>
+                                                <p className="font-semibold text-gray-900">{selectedModel.brake}</p>
+                                            </div>
+
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                                    <span className="text-xs text-gray-400 block mb-1 font-bold">DIMENSION</span>
+                                                    <p className="font-semibold text-gray-900">{selectedModel.dimension}</p>
+                                                </div>
+                                                <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                                    <span className="text-xs text-gray-400 block mb-1 font-bold">LOAD WEIGHT</span>
+                                                    <p className="font-semibold text-gray-900">{selectedModel.limitedWeight}</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                                <span className="text-xs text-gray-400 block mb-1 font-bold">CHASSIS</span>
+                                                <p className="font-semibold text-gray-900">{selectedModel.chassis}</p>
+                                            </div>
+
+                                            <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                                <span className="text-xs text-gray-400 block mb-1 font-bold">LIGHT & DISPLAY</span>
+                                                <p className="font-semibold text-gray-900">{selectedModel.lightDisplay}</p>
+                                            </div>
+
+                                            <div className="bg-green-50 p-4 rounded-xl border border-green-200 shadow-sm">
+                                                <span className="text-xs text-green-700 block mb-3 font-bold uppercase tracking-wider flex items-center gap-2">
+                                                    <Shield size={14} /> Premium Features
+                                                </span>
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                                    {selectedModel.features.map((feature, idx) => (
+                                                        <div key={idx} className="flex items-center gap-2 bg-white/50 p-1.5 rounded-lg border border-green-100">
+                                                            <Activity size={12} className="text-green-600" />
+                                                            <span className="text-xs font-medium text-gray-800">{feature}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Your Experience *
-                                    </label>
-                                    <textarea
-                                        name="text"
-                                        value={newReview.text}
-                                        onChange={handleInputChange}
-                                        rows={4}
-                                        className="w-full px-3 py-2 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                                        placeholder="Share your experience as a WS Mobility dealer partner..."
-                                        required
-                                    ></textarea>
-                                </div>
-
-                                <div className="flex space-x-3 pt-4">
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowAddForm(false)}
-                                        className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={handleSubmitReview}
-                                        className="flex-1 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
-                                    >
-                                        Submit Review
-                                    </button>
-                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 )}
-            </section>
-
-            {/* Contact */}
-            <Sendmsg />
+            </AnimatePresence>
 
         </div>
     )
