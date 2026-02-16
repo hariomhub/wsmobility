@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, User, MessageSquare, Building, CheckCircle, Loader } from 'lucide-react';
+import { Phone, Mail, Send, User, MessageSquare, Building, CheckCircle, Loader } from 'lucide-react';
 
 const Sendmsg = () => {
     const [formData, setFormData] = useState({

@@ -2,7 +2,7 @@ import React from "react";
 import ParentNav from "../../components/navbar/parentNav";
 import ParentFooter from "../../components/footer/parentFooter";
 import ScrollToTopButton from "../../utils/ScrollToTopButton";
-import { Users, ArrowLeft, Linkedin, Mail } from "lucide-react";
+import { Users, ArrowLeft, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const OurTeam = () => {

@@ -71,29 +71,29 @@ const whyChooseUsData = [
   }
 ];
 
-const footerData = {
-  brands: [
-    ["Toyota", "Honda", "Nissan", "Mazda"],
-    ["BMW", "Mercedes", "Audi", "Volkswagen"],
-    ["Ford", "Chevrolet", "Hyundai", "Kia"]
-  ],
-  businessDetails: [
-    { text: "123 Service Street, Auto City, AC 12345", type: "address" },
-    { text: "Phone: +1 (555) 123-4567" },
-    { text: "Email: info@autoservice.com" }
-  ],
-  quickLinks: [
-    { text: "About Us", href: "/about" },
-    { text: "Services", href: "/services" },
-    { text: "Contact", href: "/contact" },
-    { text: "Terms & Conditions", href: "/terms" }
-  ],
-  copyright: "© 2025 Auto Service Pro. All rights reserved.",
-  socialMedia: {
-    instagram: "https://instagram.com/autoservicepro",
-    facebook: "https://facebook.com/autoservicepro"
-  }
-};
+// const footerData = {
+//   brands: [
+//     ["Toyota", "Honda", "Nissan", "Mazda"],
+//     ["BMW", "Mercedes", "Audi", "Volkswagen"],
+//     ["Ford", "Chevrolet", "Hyundai", "Kia"]
+//   ],
+//   businessDetails: [
+//     { text: "123 Service Street, Auto City, AC 12345", type: "address" },
+//     { text: "Phone: +1 (555) 123-4567" },
+//     { text: "Email: info@autoservice.com" }
+//   ],
+//   quickLinks: [
+//     { text: "About Us", href: "/about" },
+//     { text: "Services", href: "/services" },
+//     { text: "Contact", href: "/contact" },
+//     { text: "Terms & Conditions", href: "/terms" }
+//   ],
+//   copyright: "© 2025 Auto Service Pro. All rights reserved.",
+//   socialMedia: {
+//     instagram: "https://instagram.com/autoservicepro",
+//     facebook: "https://facebook.com/autoservicepro"
+//   }
+// };
 
 const ContractServicesPage = () => {
   const [formData, setFormData] = useState({

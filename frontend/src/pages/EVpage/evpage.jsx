@@ -711,7 +711,7 @@ const EVLandingPage = () => {
                     {/* Main Content */}
                     <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
                         <div className="relative h-96 bg-gray-200 flex items-center justify-center">
-                            <img src='assets/manufacturing.png' className='w-160' />
+                            <img src='assets/manufacturing.png' className='w-160' alt='Manufacturing hub facility' />
                         </div>
 
                         <div className="p-8 lg:p-12">

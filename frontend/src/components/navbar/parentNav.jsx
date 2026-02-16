@@ -286,7 +286,7 @@ const ParentNav = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
+  return ( 
     <>
       {/* Scroll Progress Bar */}
       <div
