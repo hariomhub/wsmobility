@@ -373,7 +373,7 @@ const ParentFooter = () => {
               </li>
               <li>
                 <a
-                  href="/#contactSection"
+                  href="/contact-us"
                   className="flex items-center text-gray-300 hover:text-green-400"
                 >
                   <ChevronRight size={16} className="mr-2 text-green-500" />

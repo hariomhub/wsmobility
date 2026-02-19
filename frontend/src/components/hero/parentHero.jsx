@@ -1050,7 +1050,7 @@ const ParentHero = () => {
 
                         <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
                             <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
-                                <img src="assets/workshop.jpg" alt="Our Workshop" className="w-full h-[500px] object-cover" />
+                                <img src="https://media.istockphoto.com/id/1330705612/vector/electric-scooter-and-charging-station-isolated.jpg?s=612x612&w=0&k=20&c=x7C9oJ8lJMh5PGVMQaCMorTRqYLa4YBFbFuyq-FBIiM=" alt="Our Workshop" className="w-full h-[500px] object-contain bg-white" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-teal-900/60 to-transparent flex items-end p-8">
                                     <p className="text-white font-semibold text-xl">State-of-the-art Service Hub</p>
                                 </div>

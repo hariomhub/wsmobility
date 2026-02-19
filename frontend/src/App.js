@@ -25,6 +25,7 @@ import Scooty from './pages/Scooty/scooty';
 import BatteryPage from './pages/Battery/battery';
 import Careers from './pages/Careers/careers';
 import Gallery from './pages/Gallery/gallery';
+import ContactUs from './pages/ContactUs/contactUs';
 function App() {
   return (
     <Routes>
@@ -60,6 +61,7 @@ function App() {
       <Route path='/battery' element={<BatteryPage />} />
       <Route path='/careers' element={<Careers />} />
       <Route path='/gallery' element={<Gallery />} />
+      <Route path='/contact-us' element={<ContactUs />} />
     </Routes>
   );
 }
