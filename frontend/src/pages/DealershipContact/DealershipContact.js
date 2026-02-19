@@ -1,5 +1,15 @@
-import React, { useEffect } from 'react';
-import EvNavbar from '../../components/navbar/evNav'; // Assuming this path is correct for your project
+import React, { useEffect, useState } from 'react';
+import EvNavbar from '../../components/navbar/evNav';
+import { Zap, Gauge, ChevronRight } from 'lucide-react';
+import bike1 from '../../assets/bike1.png';
+import bike2 from '../../assets/bike2.png';
+import bike3 from '../../assets/bike3.png';
+import bike4 from '../../assets/bike4.png';
+import bike5 from '../../assets/bike5.png';
+import bike6 from '../../assets/bike6.png';
+import bike7 from '../../assets/bike7.png';
+import bike8 from '../../assets/bike8.png';
+import bike9 from '../../assets/bike9.png';
 
 // --- Data Definitions (Moved to the top for better organization) ---
 
@@ -36,7 +46,123 @@ const CAROUSEL_IMAGES = [
   'https://images.unsplash.com/photo-1634842512130-1b25022e389e?q=80&w=2940&auto=format&fit=crop',
 ];
 
+const BIKE_SLIDES = [
+    { image: bike1, name: "X LENT WS1" },
+    { image: bike2, name: "X LENT WS+" },
+    { image: bike3, name: "SOLO WS1" },
+    { image: bike4, name: "DUO WS1" },
+    { image: bike5, name: "SWIFT WS+" },
+    { image: bike6, name: "SWIFT WS1" },
+    { image: bike7, name: "SWIFT WS PRO" },
+    { image: bike8, name: "VISTO WS1" },
+    { image: bike9, name: "VISTO WS+" },
+];
+
+const BikeCarousel = () => {
+    const [current, setCurrent] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrent((prev) => (prev + 1) % BIKE_SLIDES.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const prev = () => setCurrent((c) => (c - 1 + BIKE_SLIDES.length) % BIKE_SLIDES.length);
+    const next = () => setCurrent((c) => (c + 1) % BIKE_SLIDES.length);
+
+    return (
+        <section className="py-14 bg-gradient-to-br from-green-50 to-emerald-100">
+            <div className="max-w-5xl mx-auto px-4">
+                <div className="text-center mb-8">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Our Electric Bikes</h2>
+                    <div className="w-16 h-1 bg-green-500 mx-auto mt-3 rounded-full"></div>
+                </div>
+
+                <div className="relative rounded-2xl overflow-hidden shadow-xl bg-white border-2 border-green-100">
+                    {/* Slides */}
+                    <div className="relative h-64 md:h-96 flex items-center justify-center bg-gradient-to-br from-green-50 to-white">
+                        {BIKE_SLIDES.map((slide, index) => (
+                            <div
+                                key={index}
+                                className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-700 ${index === current ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                            >
+                                <img
+                                    src={slide.image}
+                                    alt={slide.name}
+                                    className="h-44 md:h-72 object-contain drop-shadow-lg"
+                                />
+                                <span className="mt-3 text-lg md:text-2xl font-bold text-green-700 tracking-wide">
+                                    {slide.name}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Prev button */}
+                    <button
+                        onClick={prev}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-green-600 hover:text-white text-green-700 rounded-full w-10 h-10 flex items-center justify-center shadow-md transition-all duration-200"
+                    >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 6 10" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
+                        </svg>
+                    </button>
+
+                    {/* Next button */}
+                    <button
+                        onClick={next}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-green-600 hover:text-white text-green-700 rounded-full w-10 h-10 flex items-center justify-center shadow-md transition-all duration-200"
+                    >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 6 10" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+                        </svg>
+                    </button>
+
+                    {/* Dot indicators */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                        {BIKE_SLIDES.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrent(index)}
+                                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === current ? 'bg-green-600 w-6' : 'bg-green-300'}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                {/* Thumbnail strip */}
+                <div className="flex gap-3 mt-6 overflow-x-auto pb-2 justify-center">
+                    {BIKE_SLIDES.map((slide, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setCurrent(index)}
+                            className={`flex-shrink-0 w-16 h-16 rounded-xl border-2 bg-white flex items-center justify-center transition-all duration-200 ${index === current ? 'border-green-500 shadow-md scale-110' : 'border-gray-200 hover:border-green-300'}`}
+                        >
+                            <img src={slide.image} alt={slide.name} className="w-12 h-12 object-contain" />
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const SCOOTERS = [
+    { id: 1, name: "X LENT WS1", image: bike1, motor: "1200W", controller: "60/72V", speed: "25kmph" },
+    { id: 2, name: "X LENT WS+", image: bike2, motor: "1500W", controller: "60/72V", speed: "25kmph" },
+    { id: 3, name: "SOLO WS1",   image: bike3, motor: "1000W", controller: "48/60/72V", speed: "25kmph" },
+    { id: 4, name: "DUO WS1",    image: bike4, motor: "1000W", controller: "48/60/72V", speed: "25kmph" },
+    { id: 5, name: "SWIFT WS+",  image: bike5, motor: "1400W", controller: "60/72V", speed: "25kmph" },
+    { id: 6, name: "SWIFT WS1",  image: bike6, motor: "1200W", controller: "60/72V", speed: "25kmph" },
+    { id: 7, name: "SWIFT WS PRO", image: bike7, motor: "1400W", controller: "60/72V", speed: "25kmph" },
+    { id: 8, name: "VISTO WS1",  image: bike8, motor: "1200W", controller: "60/72V", speed: "25kmph" },
+    { id: 9, name: "VISTO WS+",  image: bike9, motor: "1200W", controller: "60/72V", speed: "25kmph" },
+];
+
 const DealershipContact = () => {
+    const [activeScooter, setActiveScooter] = useState(null);
+
     // useEffect hook for Flowbite Carousel initialization
     useEffect(() => {
         const initializeCarousel = () => {
@@ -94,22 +220,23 @@ const DealershipContact = () => {
             <div className="flex flex-col w-full mt-10"> {/* Adjusted margin-top for content below navbar */}
 
                 {/* Dealership contact form section */}
-                <section className="min-h-screen flex flex-col md:flex-row bg-gradient-to-r from-[#22334a] via-[#4f5c6b] to-[#a9b1bb]">
+                <section className="min-h-screen flex flex-col md:flex-row">
                     {/* Left side with the background image and text */}
                     <div className="flex-1 flex items-center justify-center px-6 md:px-20 py-16 relative">
                         <img
                             alt="World map with blue glowing points representing locations"
-                            src="https://storage.googleapis.com/a1aa/image/f2625f59-09c4-4a9f-22f7-2388962f52a9.jpg"
-                            className="hidden md:block absolute left-0 top-0 bottom-0 w-full object-cover opacity-20 pointer-events-none"
+                            src="https://media.istockphoto.com/id/1330705612/vector/electric-scooter-and-charging-station-isolated.jpg?s=612x612&w=0&k=20&c=x7C9oJ8lJMh5PGVMQaCMorTRqYLa4YBFbFuyq-FBIiM="
+                            className="hidden md:block absolute left-0 top-0 bottom-0 w-full object-cover pointer-events-none mt-10"
+
                             style={{ zIndex: 0 }}
                             width={600}
                             height={400}
                         />
-                        <div className="max-w-lg text-white relative z-10">
-                            <h1 className="font-extrabold text-3xl md:text-4xl leading-tight mb-4">
+                        <div className="max-w-lg relative z-10">
+                            <h1 className="font-extrabold text-3xl md:text-4xl leading-tight mt-40 mb-4 text-gray-900">
                                 Wsmobility Electric Scooter Dealership - Best Electric Bike Franchise
                             </h1>
-                            <h2 className="font-semibold text-lg md:text-xl leading-snug">
+                            <h2 className="font-semibold text-lg md:text-xl leading-snug text-green-600">
                                 1000+ EV Dealership & Service Partners In Pan India Bases
                             </h2>
                         </div>
@@ -216,7 +343,7 @@ const DealershipContact = () => {
                                 <div className="flex justify-center mt-6">
                                     <button
                                         type="submit"
-                                        className="bg-gradient-to-r from-pink-500 to-red-400 text-white px-8 py-3 rounded-full text-lg font-bold hover:brightness-110 transition-transform transform hover:scale-105" // Larger button, bolder text, subtle hover effect
+                                        className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full text-lg font-bold transition-transform transform hover:scale-105"
                                     >
                                         Submit
                                     </button>
@@ -227,7 +354,7 @@ const DealershipContact = () => {
                 </section>
 
                 {/* Dealership benefits cards section */}
-                <section className="relative bg-gradient-to-b from-yellow-200 to-yellow-300 overflow-hidden">
+                <section className="relative bg-gradient-to-b from-green-50 to-emerald-100 overflow-hidden">
                     <img
                         alt="Row of electric scooters in various colors parked on a white floor with a soft yellow-orange gradient sky background"
                         className="w-full object-cover object-center absolute inset-0 h-full -z-10 opacity-30" // Added opacity for better text readability
@@ -248,7 +375,7 @@ const DealershipContact = () => {
                             {/* Dynamically render benefit cards using the DEALERSHIP_BENEFITS array */}
                             {DEALERSHIP_BENEFITS.map((benefit) => (
                                 <div key={benefit.id} className="relative bg-white p-8 pt-16 rounded-xl shadow-lg"> {/* Added rounded corners and shadow */}
-                                    <div className="absolute -top-8 left-8 bg-red-500 px-5 py-3 font-extrabold text-white text-4xl leading-none rounded-md"> {/* Added rounded corners */}
+                                    <div className="absolute -top-8 left-8 bg-green-600 px-5 py-3 font-extrabold text-white text-4xl leading-none rounded-md">
                                         {benefit.id}
                                     </div>
                                     <h3 className="text-slate-900 font-semibold text-xl mb-3"> {/* Increased font size */}
@@ -314,64 +441,8 @@ const DealershipContact = () => {
                     </div>
                 </div>
 
-                {/* Carousel Section */}
-                <section className="py-12 bg-gray-100"> {/* Added padding and light background */}
-                    <div id="default-carousel" className="relative w-full max-w-7xl mx-auto" data-carousel="static"> {/* Centered carousel and added max-width */}
-                        {/* Carousel wrapper */}
-                        <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-                            {/* Dynamically render carousel items */}
-                            {CAROUSEL_IMAGES.map((image, index) => (
-                                <div
-                                    key={index}
-                                    id={`carousel-item-${index + 1}`}
-                                    className="hidden duration-700 ease-in-out"
-                                    data-carousel-item={index === 0 ? "active" : ""} // Set first item as active
-                                >
-                                    <img
-                                    loading='lazy'
-                                        src={image}
-                                        className="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                                        alt={`Electric scooter image ${index + 1}`}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Slider indicators */}
-                        <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                            {/* Dynamically render indicators */}
-                            {CAROUSEL_IMAGES.map((_, index) => (
-                                <button
-                                    key={index}
-                                    id={`carousel-slide-to-${index}`}
-                                    type="button"
-                                    className="w-3 h-3 rounded-full"
-                                    aria-current={index === 0 ? "true" : "false"}
-                                    aria-label={`Slide ${index + 1}`}
-                                    data-carousel-slide-to={index}
-                                ></button>
-                            ))}
-                        </div>
-
-                        {/* Slider controls */}
-                        <button type="button" className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
-                                </svg>
-                                <span className="sr-only">Previous</span>
-                            </span>
-                        </button>
-                        <button type="button" className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
-                                </svg>
-                                <span className="sr-only">Next</span>
-                            </span>
-                        </button>
-                    </div>
-                </section>
+                {/* Bike Image Carousel */}
+                <BikeCarousel />
 
                 {/* FIND YOUR NEAREST DEALER form section */}
                 <section className="max-w-7xl mx-auto px-6 py-12 bg-white text-gray-700">
@@ -476,12 +547,84 @@ const DealershipContact = () => {
                         <div className="md:col-span-4 flex justify-center mt-6">
                             <button
                                 type="submit"
-                                className="bg-orange-500 hover:bg-orange-600 text-white text-lg font-medium px-8 py-3 rounded-md transition-colors" // Larger button, rounded corners
+                                className="bg-green-600 hover:bg-green-700 text-white text-lg font-medium px-8 py-3 rounded-md transition-colors"
                             >
                                 Search
                             </button>
                         </div>
                     </form>
+                </section>
+
+                {/* Scooty Product Showcase */}
+                <section className="bg-white py-16 px-4">
+                    <div className="max-w-7xl mx-auto">
+                        {/* Header */}
+                        <div className="text-center mb-12">
+                            <span className="inline-block bg-green-100 text-green-700 text-sm font-semibold px-4 py-1 rounded-full mb-3 tracking-wide uppercase">
+                                Our Electric Fleet
+                            </span>
+                            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+                                Our Product Range
+                            </h2>
+                            <div className="w-20 h-1 bg-green-500 mx-auto rounded-full mb-4"></div>
+                            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                                Explore our full lineup of electric scooters — built for performance, comfort, and a greener tomorrow.
+                            </p>
+                        </div>
+
+                        {/* Scooter Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {SCOOTERS.map((scooter) => (
+                                <div
+                                    key={scooter.id}
+                                    className="group bg-white border-2 border-gray-100 hover:border-green-400 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden"
+                                >
+                                    {/* Image */}
+                                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center h-52 p-6">
+                                        <img
+                                            src={scooter.image}
+                                            alt={scooter.name}
+                                            className="h-40 object-contain group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                    </div>
+
+                                    {/* Details */}
+                                    <div className="p-5">
+                                        <h3 className="text-xl font-bold text-gray-900 mb-3">{scooter.name}</h3>
+                                        <div className="flex flex-wrap gap-3 mb-4">
+                                            <div className="flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5">
+                                                <Zap size={14} className="text-green-600" />
+                                                <span className="text-xs font-semibold text-gray-700">{scooter.motor}</span>
+                                            </div>
+                                            <div className="flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5">
+                                                <Gauge size={14} className="text-green-600" />
+                                                <span className="text-xs font-semibold text-gray-700">{scooter.speed}</span>
+                                            </div>
+                                            <div className="flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5">
+                                                <span className="text-xs font-semibold text-green-700">⚡ {scooter.controller}</span>
+                                            </div>
+                                        </div>
+                                        <a
+                                            href="/scooty"
+                                            className="inline-flex items-center gap-1 text-green-600 hover:text-green-800 font-semibold text-sm transition-colors duration-200"
+                                        >
+                                            View Details <ChevronRight size={16} />
+                                        </a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* CTA */}
+                        <div className="mt-12 text-center">
+                            <a
+                                href="/scooty"
+                                className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-4 rounded-full transition-colors duration-300 text-lg shadow-md hover:shadow-lg"
+                            >
+                                Explore Full Catalogue <ChevronRight size={20} />
+                            </a>
+                        </div>
+                    </div>
                 </section>
 
             </div>
