@@ -26,7 +26,7 @@ const EVLandingPage = () => {
         navigate('/evbikemodels');
     }
 
-    const address = "Engtian Electric Bike Pvt Ltd - Gut No 35, Nk E-Bike, Village -Dhotre Bk, Block - Parner, Ahmednagar, Maharashtra 414304";
+    const address = "Mitu Palace-202, Near PNB bank, Chitragupta Nagar, Kanti Factory Rd, Kankarbagh, Patna, Bihar-800026";
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
     const location = useLocation();
@@ -735,19 +735,11 @@ const EVLandingPage = () => {
                                         <div className="space-y-3">
                                             <div className="flex items-start gap-3">
                                                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                                                <span className="text-gray-700 text-lg font-semibold">Engtian Electric Bike Pvt Ltd</span>
+                                                <span className="text-gray-700 text-lg font-semibold">WS Mobility Pvt. Ltd.</span>
                                             </div>
                                             <div className="flex items-start gap-3">
                                                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                                                <span className="text-gray-700">Gut No 35, NK E-Bike</span>
-                                            </div>
-                                            <div className="flex items-start gap-3">
-                                                <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                                                <span className="text-gray-700">Village - Dhotre Bk, Block - Parner</span>
-                                            </div>
-                                            <div className="flex items-start gap-3">
-                                                <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                                                <span className="text-gray-700">Ahmednagar, Maharashtra 414304</span>
+                                                <span className="text-gray-700">Mitu Palace-202, Near PNB bank, Chitragupta Nagar, Kanti Factory Rd, Kankarbagh, Patna, Bihar-800026</span>
                                             </div>
                                         </div>
                                     </div>
@@ -786,10 +778,8 @@ const EVLandingPage = () => {
                                             <div className="bg-white p-4 rounded-xl shadow-sm">
                                                 <h4 className="font-semibold text-gray-800 mb-2">Complete Address</h4>
                                                 <p className="text-gray-600 leading-relaxed text-sm">
-                                                    Engtian Electric Bike Pvt Ltd<br />
-                                                    Gut No 35, NK E-Bike<br />
-                                                    Village - Dhotre Bk, Block - Parner<br />
-                                                    Ahmednagar, Maharashtra 414304
+                                                    Mitu Palace-202, Near PNB bank, <br /> Chitragupta Nagar, Kanti Factory Rd, <br /> Kankarbagh, Patna, Bihar-800026
+
                                                 </p>
                                             </div>
                                         </div>
@@ -825,7 +815,7 @@ const EVLandingPage = () => {
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                                                <span className="text-gray-700">Strategic location in Maharashtra</span>
+                                                <span className="text-gray-700">Strategic location in Bihar</span>
                                             </div>
                                         </div>
                                     </div>
