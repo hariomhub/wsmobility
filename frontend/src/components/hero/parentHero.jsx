@@ -47,6 +47,8 @@ import bike7 from "../../assets/bike7.png";
 import bike8 from "../../assets/bike8.png";
 import bike9 from "../../assets/bike9.png";
 
+import reachus from "../../assets/reachus.jpg";
+
 
 const ParentHero = () => {
     const [rotation, setRotation] = useState(0);
@@ -1491,7 +1493,7 @@ const ParentHero = () => {
 
                             <div className="mt-auto relative rounded-2xl overflow-hidden h-64 sm:h-72 w-full group">
                                 <img
-                                    src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweqZDMWSknD-0eZYOI-j4vxWYHcnrrqp8lfPCuimanMMmsUSZNTOBU1luZZhtxyAKMRus9wD9ADNXTmpmMOGZOR6K6tJO20o8DEG_gGJCdYZAgR0GY2QBFbNz05v3FWDJuQiFfk0ZZtPN8xm=s1360-w1360-h1020-rw"
+                                    src={reachus}
                                     alt="WS Mobility Delivery Vehicle"
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
