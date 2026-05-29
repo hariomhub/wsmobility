@@ -2,7 +2,7 @@ import React from "react";
 import ParentNav from "../../components/navbar/parentNav";
 import ParentFooter from "../../components/footer/parentFooter";
 import ScrollToTopButton from "../../utils/ScrollToTopButton";
-import { Users, ArrowLeft, Mail } from "lucide-react";
+import { Users, ArrowLeft, Mail, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const OurTeam = () => {
@@ -142,6 +142,66 @@ const OurTeam = () => {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Corporate Offices Section */}
+      <div className="bg-white border-t-2 border-green-200 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Our Locations</h2>
+            <p className="text-gray-600 text-lg">Visit us at any of our offices across India</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Corporate Office */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-green-600 p-3 rounded-full">
+                  <MapPin size={24} className="text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900">Corporate Office</h3>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                7 Lyons Range, 1st Floor, Room No. 17B,<br/>
+                Ganputray Kayan & Co.,<br/>
+                The Calcutta Stock Exchange Building,<br/>
+                <span className="font-semibold">Kolkata – 700001</span>
+              </p>
+            </div>
+            
+            {/* Patna Office */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-green-600 p-3 rounded-full">
+                  <MapPin size={24} className="text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900">Patna Office</h3>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                202 Mitu Palace, Near PNB Bank,<br/>
+                Kanti Factory Rd, Chitragupta Nagar,<br/>
+                Kankarbagh,<br/>
+                <span className="font-semibold">Patna, Bihar – 800026</span>
+              </p>
+            </div>
+            
+            {/* Service Center */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-green-600 p-3 rounded-full">
+                  <MapPin size={24} className="text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900">Service Center</h3>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                Naya Tola, Sadar Block, Kumhrar,<br/>
+                BOSCH Authorized Car Service Center,<br/>
+                <br/>
+                <span className="font-semibold">Patna, Bihar – 800026</span>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 

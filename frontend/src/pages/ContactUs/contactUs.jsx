@@ -43,6 +43,16 @@ const ContactUs = () => {
   const contactDetails = [
     {
       icon: <MapPin size={24} className="text-green-600" />,
+      title: "Corporate Office",
+      lines: [
+        "7 Lyons Range, 1st Floor, Room No. 17B,",
+        "Ganputray Kayan & Co.,",
+        "The Calcutta Stock Exchange Building,",
+        "Kolkata – 700001",
+      ],
+    },
+    {
+      icon: <MapPin size={24} className="text-green-600" />,
       title: "Our Office",
       lines: [
         "202 Mitu Palace, Near PNB Bank,",
