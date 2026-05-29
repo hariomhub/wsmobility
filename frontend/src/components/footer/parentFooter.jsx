@@ -423,6 +423,14 @@ const ParentFooter = () => {
                   <MapPin size={18} className="text-green-400" />
                 </div>
                 <p className="text-gray-300">
+                  7 Lyons Range, 1st Floor, Room No. 17B, Ganputray Kayan & Co., The Calcutta Stock Exchange Building, Kolkata - 700001
+                </p>
+              </li>
+              <li className="flex items-start">
+                <div className="mr-4 mt-1 bg-gray-800 p-2 rounded-full">
+                  <MapPin size={18} className="text-green-400" />
+                </div>
+                <p className="text-gray-300">
                   202 Mitu Palace, Near PNB bank, Kanti Factory Rd, Chitragupta
                   Nagar, Kankarbagh, Patna, Bihar-800026
                 </p>

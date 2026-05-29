@@ -1484,10 +1484,16 @@ const ParentHero = () => {
                                         <span className="font-semibold w-24 text-teal-800">Email:</span>
                                         sales@wsmobility.in
                                     </p>
-                                    <p className="flex items-start text-gray-600">
-                                        <span className="font-semibold w-24 text-teal-800 flex-shrink-0">Location:</span>
-                                        <span>Mitu Palace-202, Near PNB bank, Chitragupta Nagar, Kanti Factory Rd, Kankarbagh, Patna, Bihar-800026</span>
-                                    </p>
+                                    <div className="text-gray-600">
+                                        <p className="flex items-start">
+                                            <span className="font-semibold w-24 text-teal-800 flex-shrink-0">Location:</span>
+                                            <span>Mitu Palace-202, Near PNB bank, Chitragupta Nagar, Kanti Factory Rd, Kankarbagh, Patna, Bihar-800026</span>
+                                        </p>
+                                        <p className="flex items-start">
+                                            <span className="font-semibold w-24 text-teal-800 flex-shrink-0">Corporate:</span>
+                                            <span>7 Lyons Range, 1st Floor, Room No. 17B, Ganputray Kayan & Co., The Calcutta Stock Exchange Building, Kolkata-700001</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
 
